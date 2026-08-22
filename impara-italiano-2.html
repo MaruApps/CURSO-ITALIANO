@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impara l'Italiano — Corso A1</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232C5F7C'/%3E%3Ctext x='50' y='70' font-size='56' font-family='Georgia,serif' font-weight='700' fill='%23F1E8D0' text-anchor='middle'%3EI%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1E8D0; --paper-card:#FFFDF7; --ink:#1B2B3A; --ink-soft:#4A5A6B;
+    --blue:#2C5F7C; --blue-dark:#1E4358; --terra:#A85030; --ochre:#D9A441;
+    --ochre-light:#F3D98B; --olive:#5B7F4B; --olive-light:#E4EBD9;
+    --red:#B24C3A; --red-light:#F5E1DA; --border:#1B2B3A22; --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper);
+    background-image:linear-gradient(var(--paper) 0%, var(--paper) 100%),
+      repeating-linear-gradient(0deg, transparent, transparent 27px, #1B2B3A08 28px);
+    color:var(--ink); font-family:'Work Sans', sans-serif; line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; margin:0 0 .4em;}
+  .wrap{max-width:920px; margin:0 auto; padding:2rem 1.5rem 5rem;}
+  header.top{display:flex; align-items:center; justify-content:space-between; margin-bottom:1.75rem; flex-wrap:wrap; gap:1rem;}
+  .brand{display:flex; align-items:baseline; gap:.6rem;}
+  .brand h1{font-size:1.7rem; color:var(--blue-dark);}
+  .brand span{font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.08em; color:var(--terra); text-transform:uppercase; background:var(--red-light); padding:2px 8px; border-radius:20px;}
+  .levels{display:flex; gap:.4rem;}
+  .level-btn{font-family:'JetBrains Mono',monospace; font-size:.75rem; letter-spacing:.03em; padding:.5rem .9rem; border-radius:20px; border:1.5px solid var(--border); background:var(--paper-card); color:var(--ink-soft); cursor:pointer;}
+  .level-btn.active{background:var(--blue); border-color:var(--blue); color:#fff;}
+  .level-btn:disabled{opacity:.4; cursor:not-allowed;}
+  .progress-row{display:flex; align-items:center; gap:.8rem; margin-bottom:2rem;}
+  .progress-track{flex:1; height:10px; background:#1B2B3A15; border-radius:6px; overflow:hidden;}
+  .progress-fill{height:100%; background:var(--ochre); transition:width .4s ease;}
+  .progress-label{font-family:'JetBrains Mono',monospace; font-size:.75rem; color:var(--ink-soft); white-space:nowrap;}
+  .layout{display:grid; grid-template-columns:220px 1fr; gap:1.5rem;}
+  @media (max-width:680px){ .layout{grid-template-columns:1fr;} }
+  .notebook{background:var(--paper-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; height:fit-content;}
+  .notebook-spine{background:var(--blue-dark); color:#fff; font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; padding:.6rem 1rem;}
+  .unit-item{padding:.75rem 1rem; border-top:1px solid var(--border); font-size:.9rem; cursor:pointer; display:flex; align-items:center; gap:.5rem;}
+  .unit-item.active{background:var(--ochre-light); font-weight:500;}
+  .unit-item.locked{color:var(--ink-soft); opacity:.55; cursor:not-allowed;}
+  .unit-dot{width:8px; height:8px; border-radius:50%; background:var(--border); flex-shrink:0;}
+  .unit-item.done .unit-dot{background:var(--olive);}
+  .unit-item.active .unit-dot{background:var(--terra);}
+  .card{background:var(--paper-card); border:1px solid var(--border); border-radius:var(--radius); padding:1.75rem 2rem; margin-bottom:1.5rem;}
+  .card h2{font-size:1.25rem; color:var(--blue-dark); display:flex; align-items:center; gap:.6rem;}
+  .card h2 .tag{font-family:'JetBrains Mono',monospace; font-size:.65rem; text-transform:uppercase; letter-spacing:.06em; background:var(--blue); color:#fff; padding:3px 9px; border-radius:20px;}
+  .card h3.gram-label{font-size:1rem; margin:1.1rem 0 .3rem; color:var(--blue-dark);}
+  .verb-table{width:100%; border-collapse:collapse; margin:.5rem 0 1rem; font-size:.95rem;}
+  .verb-table td{padding:.4rem .6rem; border-bottom:1px solid var(--border);}
+  .verb-table td:first-child{color:var(--ink-soft); width:45%;}
+  .verb-table td:last-child{font-weight:500; color:var(--blue-dark);}
+  .verb-table td.audio-cell{width:36px; text-align:right; padding:.4rem 0;}
+  .mini-play{width:28px; height:28px; border-radius:50%; border:1.5px solid var(--blue); background:#fff; color:var(--blue); cursor:pointer; flex-shrink:0; font-size:.65rem; line-height:1;}
+  .mini-play:hover{background:var(--blue); color:#fff;}
+  .alpha-row{display:flex; align-items:center; gap:.7rem; padding:.5rem .1rem; border-bottom:1px solid var(--border);}
+  .alpha-row:last-child{border-bottom:none;}
+  .alpha-letter{font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; color:var(--blue-dark); min-width:38px;}
+  .alpha-desc{flex:1; font-size:.83rem; color:var(--ink-soft);}
+  .alpha-example{font-weight:500; min-width:84px;}
+  .unit-illustration{width:100%; max-width:380px; margin:0 auto 1rem; display:block;}
+  .unit-illustration svg{width:100%; height:auto; display:block;}
+  .course-cover{width:100%; max-width:280px; margin:0 auto 1.5rem; display:block; border-radius:16px; border:3px solid var(--paper-card); box-shadow:0 4px 0 var(--border);}
+  .hero-banner{display:flex; align-items:stretch; background:var(--blue-dark); border-radius:16px; overflow:hidden; margin-bottom:1.75rem; position:relative;}
+  .hero-banner-img{width:200px; flex-shrink:0; object-fit:cover; object-position:top center; display:block;}
+  .hero-banner-noimg{padding:1.8rem 2rem;}
+  .hero-flag-stripe-it{background:repeating-linear-gradient(90deg, #2E7D4F 0 20px, #FFFDF7 20px 40px, #A85030 40px 60px);}
+  .hero-banner-text{flex:1; padding:1.5rem 1.75rem; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:1;}
+  .hero-badge{display:inline-block; align-self:flex-start; font-family:'JetBrains Mono',monospace; font-size:.65rem; text-transform:uppercase; letter-spacing:.06em; background:var(--terra); color:#FFFDF7; padding:3px 10px; border-radius:20px; margin-bottom:.6rem;}
+  .hero-banner-text h2{font-family:'Fraunces',serif; font-weight:600; font-size:1.4rem; color:#FFFDF7; margin:0 0 .45rem; line-height:1.2;}
+  .hero-banner-text p{font-family:'Work Sans',sans-serif; font-size:.9rem; color:var(--ochre-light); margin:0; line-height:1.5;}
+  .hero-signature{font-family:'Fraunces',serif; font-style:italic; font-size:.78rem; color:#FFFDF7AA; margin-top:.7rem;}
+  .hero-flag-stripe{position:absolute; left:0; right:0; bottom:0; height:6px; background:repeating-linear-gradient(90deg, var(--terra) 0 20px, var(--ochre) 20px 40px);}
+  @media (max-width:560px){
+    .hero-banner{flex-direction:column;}
+    .hero-banner-img{width:100%; height:180px;}
+  }
+  .clock-icon{display:inline-flex; width:44px; height:44px; flex-shrink:0;}
+  .ex-clock{display:inline-flex; width:56px; height:56px; flex-shrink:0;}
+  .ex-row{display:flex; align-items:center; gap:.9rem;}
+  .verb-card{margin-bottom:1.4rem; padding-bottom:1.3rem; border-bottom:1px solid var(--border);}
+  .verb-card:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  .verb-card h3.gram-label{margin-bottom:.6rem;}
+  .verb-meaning{font-family:'Work Sans',sans-serif; font-weight:400; font-size:.85rem; color:var(--terra);}
+  .verb-tenses{display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem;}
+  @media (max-width:680px){ .verb-tenses{grid-template-columns:1fr;} }
+  .tense-label{font-family:'JetBrains Mono',monospace; font-size:.65rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); margin:0 0 .3rem;}
+  .result-box{margin-top:1rem; padding:1rem 1.2rem; border-radius:8px; font-weight:500; display:block; line-height:1.6;}
+  .auth-wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:1.5rem;}
+  .auth-card{background:var(--paper-card); border:1px solid var(--border); border-radius:16px; padding:2rem 1.8rem; max-width:380px; width:100%; box-shadow:0 4px 0 var(--border);}
+  .auth-title{font-size:1.5rem; color:var(--blue-dark); text-align:center; margin-bottom:.2rem;}
+  .auth-sub{text-align:center; color:var(--ink-soft); font-size:.85rem; margin-bottom:1.3rem;}
+  .auth-card input{width:100%; padding:.7rem .9rem; margin-bottom:.7rem; border:1.5px solid var(--border); border-radius:8px; font-family:'Work Sans',sans-serif; font-size:.95rem; background:#fff;}
+  .auth-card input:focus{outline:none; border-color:var(--blue);}
+  .auth-msg{font-size:.85rem; padding:.6rem .8rem; border-radius:8px; margin-bottom:.8rem;}
+  .auth-msg.bad{background:var(--red-light); color:#7a2a1a;}
+  .auth-msg.ok{background:var(--olive-light); color:#2f4423;}
+  .auth-toggle, .auth-forgot{text-align:center; font-size:.85rem; color:var(--ink-soft); margin-top:.9rem;}
+  .auth-toggle a, .auth-forgot a{color:var(--blue); font-weight:500; text-decoration:none;}
+  .user-bar{display:flex; align-items:center; gap:.6rem; margin-left:auto;}
+  .user-email{font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--ink-soft);}
+  .admin-table{width:100%; border-collapse:collapse; font-size:.9rem;}
+  .admin-table th{text-align:left; padding:.5rem .6rem; border-bottom:2px solid var(--border); font-family:'JetBrains Mono',monospace; font-size:.7rem; text-transform:uppercase; color:var(--ink-soft);}
+  .admin-table td{padding:.5rem .6rem; border-bottom:1px solid var(--border);}
+  .consigna{cursor:pointer; border-bottom:1.5px dotted var(--terra);}
+  .consigna::after{content:" 🇪🇸"; font-size:.7em; opacity:.65;}
+  .consigna:hover{background:var(--red-light);}
+  .consigna-es{font-size:.85rem; color:var(--terra); font-style:italic; margin:.35rem 0 .7rem; padding:.45rem .65rem; background:#FBF7EC; border-left:3px solid var(--terra); border-radius:0 6px 6px 0;}
+  .translate-hint{text-align:center; font-size:.78rem; color:var(--terra); background:var(--red-light); padding:.5rem .8rem; border-radius:8px; margin:-1rem 0 1.5rem;}
+  .result-box.ok{background:var(--olive-light); color:#2f4423;}
+  .result-box.mid{background:var(--ochre-light); color:#5c4106;}
+  .result-box.bad{background:var(--red-light); color:#7a2a1a;}
+  .sim-meta{font-size:.8rem; color:var(--ink-soft); font-style:italic; margin:-.3rem 0 .6rem;}
+  .dialogue{background:#FBF7EC; border-left:3px solid var(--ochre); padding:1rem 1.2rem; border-radius:0 8px 8px 0; margin:1rem 0; font-size:.95rem;}
+  .dialogue p{margin:.3rem 0;}
+  .dialogue b{color:var(--blue-dark);}
+
+  /* GLOSSARY / interactive words */
+  .gloss{background:var(--ochre-light); padding:0 4px; border-radius:3px; font-weight:500; cursor:pointer; border-bottom:1.5px dotted var(--terra);}
+  .gloss:hover{background:var(--ochre); color:var(--ink);}
+  #glossTooltip{position:absolute; display:none; background:var(--ink); color:#fff; font-size:.8rem; padding:.45rem .7rem; border-radius:6px; max-width:230px; z-index:80; box-shadow:0 6px 16px rgba(0,0,0,.18); pointer-events:none;}
+  .glossary-grid{display:grid; grid-template-columns:1fr 1fr; gap:.4rem .8rem;}
+  @media (max-width:480px){ .glossary-grid{grid-template-columns:1fr;} }
+  .gloss-row{display:flex; justify-content:space-between; gap:.6rem; padding:.4rem .6rem; background:#FBF7EC; border-radius:6px; font-size:.85rem;}
+  .gloss-row .ca{font-weight:500;}
+  .gloss-row .es{color:var(--ink-soft);}
+
+  .exercise{margin-bottom:1.2rem;}
+  .exercise p.q{margin-bottom:.5rem;}
+  .exercise input[type=text]{border:1.5px solid var(--border); border-radius:6px; padding:.4rem .6rem; font-size:.95rem; font-family:inherit; width:160px;}
+  .exercise input[type=text]:focus{outline:none; border-color:var(--blue);}
+  .fb{font-size:.85rem; margin-top:.35rem; display:none;}
+  .fb.ok{color:var(--olive); display:block;}
+  .fb.bad{color:var(--red); display:block;}
+  .ex-divider{border:none; border-top:1px dashed var(--border); margin:1.2rem 0;}
+  button.action{font-family:'Work Sans',sans-serif; font-weight:500; font-size:.9rem; background:var(--blue); color:#fff; border:none; border-radius:8px; padding:.6rem 1.2rem; cursor:pointer; margin-top:.3rem;}
+  button.action:hover{background:var(--blue-dark);}
+  .phrase-row{display:flex; align-items:center; justify-content:space-between; padding:.7rem 0; border-bottom:1px solid var(--border);}
+  .phrase-row:last-child{border-bottom:none;}
+  .phrase-cat{font-weight:500;}
+  .phrase-es{color:var(--ink-soft); font-size:.85rem;}
+  .play-btn{width:36px; height:36px; border-radius:50%; border:1.5px solid var(--blue); background:#fff; color:var(--blue); cursor:pointer; flex-shrink:0;}
+  .play-btn:hover{background:var(--blue); color:#fff;}
+  .q-block{margin-bottom:1.3rem; padding-bottom:1.3rem; border-bottom:1px solid var(--border);}
+  .q-block:last-of-type{border-bottom:none;}
+  .opt{display:block; margin:.35rem 0; cursor:pointer; font-size:.95rem;}
+  .opt input{margin-right:.5rem;}
+  #test-result{display:none; margin-top:1rem; padding:1rem 1.2rem; border-radius:8px; font-weight:500;}
+  #test-result.ok{display:block; background:var(--olive-light); color:#2f4423;}
+  #test-result.mid{display:block; background:var(--ochre-light); color:#5c4106;}
+  #test-result.bad{display:block; background:var(--red-light); color:#7a2a1a;}
+  .note{font-size:.8rem; color:var(--ink-soft); margin-top:.5rem; font-style:italic;}
+  footer{text-align:center; color:var(--ink-soft); font-size:.8rem; margin-top:2rem;}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div id="authScreen" class="auth-wrap">
+  <div class="auth-card">
+    <h1 class="auth-title">Impara l'Italiano</h1>
+    <p class="auth-sub">Accedi per salvare i tuoi progressi</p>
+    <div id="authMsg" class="auth-msg" style="display:none;"></div>
+    <input type="email" id="authEmail" placeholder="Indirizzo email" autocomplete="email">
+    <input type="password" id="authPassword" placeholder="Password" autocomplete="current-password">
+    <button type="button" class="action" style="width:100%;" onclick="handleAuthSubmit()" id="authSubmitBtn">Inicia sessió</button>
+    <p class="auth-toggle"><span id="authToggleText">Non hai ancora un account?</span> <a href="#" onclick="toggleAuthMode(); return false;" id="authToggleLink">Registrati</a></p>
+    <p class="auth-forgot"><a href="#" onclick="handleForgotPassword(); return false;">Hai dimenticato la password?</a></p>
+  </div>
+</div>
+
+<div id="appRoot" style="display:none;">
+<div class="wrap">
+  <div class="hero-banner hero-banner-noimg">
+    <div class="hero-banner-text">
+      <span class="hero-badge">Livello A1</span>
+      <h2>Impara l'italiano, passo dopo passo</h2>
+      <p>La tua porta d'ingresso alla lingua e alla cultura italiana.</p>
+      <p class="hero-signature">by Maru</p>
+    </div>
+    <div class="hero-flag-stripe hero-flag-stripe-it"></div>
+  </div>
+
+  <header class="top">
+    <div class="brand"><h1>Impara l'Italiano</h1></div>
+    <div class="levels">
+      <button class="level-btn active" id="a1Btn" onclick="setView('unitats')">A1</button>
+      <button class="level-btn" id="glossariBtn" onclick="toggleGlossari()">📖 Glossari</button>
+      <button class="level-btn" id="simulacreBtn" onclick="toggleSimulacre()">🎯 Test general</button>
+      <button class="level-btn" id="adminBtn" style="display:none; border-color:var(--terra); color:var(--terra);" onclick="toggleAdmin()">🛠️ Admin</button>
+      <div class="user-bar">
+        <span class="user-email" id="userEmailLabel"></span>
+        <button class="level-btn" onclick="handleLogout()">Esci</button>
+      </div>
+    </div>
+  </header>
+
+  <p class="translate-hint">💬 Tocca il testo sottolineato in arancione per tradurlo in spagnolo · Toca el texto subrayado en naranja para traducirlo al español</p>
+
+  <div class="progress-row" id="progressRow">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+    <button class="level-btn" style="border-color:var(--ink-soft); color:var(--ink-soft);" onclick="resetProgress()">Reimposta progressi</button>
+  </div>
+
+  <div id="certificateBanner" style="display:none;"></div>
+
+  <div class="layout" id="unitsLayout">
+    <aside class="notebook">
+      <div class="notebook-spine">Unità · A1</div>
+      <div id="unitList"></div>
+      <div class="note" style="padding:.7rem 1rem 1rem;">Completa el test per desbloquejar la següent unitat.</div>
+    </aside>
+    <main id="unitContent"></main>
+  </div>
+
+  <main id="glossariContent" style="display:none;"></main>
+
+  <main id="simulacreContent" style="display:none;"></main>
+
+  <main id="adminContent" style="display:none;"></main>
+
+  <footer>Contenuto originale per l'apprendimento dell'italiano · Livello A1 · Tocca le parole evidenziate per vederne il significato</footer>
+</div>
+
+<div id="glossTooltip"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ---------- DADES ---------- */
+const UNITS = [
+  {
+    id: 0,
+    title: "L'alfabeto e la pronuncia",
+    image: `<svg viewBox="0 0 400 170"><rect x="40" y="20" width="320" height="130" rx="14" fill="#FFFDF7" stroke="#1B2B3A22" stroke-width="2"/><line x1="60" y1="60" x2="340" y2="60" stroke="#1B2B3A15" stroke-width="2"/><line x1="60" y1="90" x2="340" y2="90" stroke="#1B2B3A15" stroke-width="2"/><line x1="60" y1="120" x2="340" y2="120" stroke="#1B2B3A15" stroke-width="2"/><text x="110" y="100" font-size="64" font-family="Georgia,serif" font-weight="700" fill="#2C5F7C" text-anchor="middle">A</text><text x="200" y="100" font-size="50" font-family="Georgia,serif" font-weight="700" fill="#A85030" text-anchor="middle">B</text><text x="280" y="100" font-size="40" font-family="Georgia,serif" font-weight="700" fill="#D9A441" text-anchor="middle">C</text><g transform="translate(280,118) rotate(35)"><rect x="0" y="0" width="60" height="12" rx="3" fill="#D9A441"/><rect x="0" y="0" width="8" height="12" fill="#1B2B3A"/><polygon points="60,0 76,6 60,12" fill="#E8C39E"/></g></svg>`,
+    theory: {
+      intro: "L'italiano condivide molte lettere con lo spagnolo, ma ha alcuni suoni particolari. Tocca il pulsante di ogni esempio per ascoltare come suona.",
+      letters: [
+        {letter:"a", desc:"come la 'a' spagnola", example:"amico"},
+        {letter:"b", desc:"suono occlusivo, come in spagnolo", example:"bello"},
+        {letter:"c", desc:"'k' davanti a/o/u, 'ch' (come in 'chico') davanti e/i", example:"cane / cena"},
+        {letter:"d", desc:"come in spagnolo", example:"dado"},
+        {letter:"e", desc:"può essere aperta o chiusa", example:"sette"},
+        {letter:"f", desc:"come in spagnolo", example:"fuoco"},
+        {letter:"g", desc:"'g' davanti a/o/u, 'j' inglese davanti e/i", example:"gatto / gelato"},
+        {letter:"h", desc:"sempre muta, non si pronuncia", example:"hotel"},
+        {letter:"i", desc:"come in spagnolo", example:"isola"},
+        {letter:"l", desc:"come in spagnolo", example:"luna"},
+        {letter:"m", desc:"come in spagnolo", example:"mano"},
+        {letter:"n", desc:"come in spagnolo", example:"naso"},
+        {letter:"o", desc:"può essere aperta o chiusa", example:"otto"},
+        {letter:"p", desc:"come in spagnolo", example:"pane"},
+        {letter:"q", desc:"sempre con 'u', suono di 'k'", example:"quattro"},
+        {letter:"r", desc:"vibrante, come in spagnolo", example:"rosa"},
+        {letter:"s", desc:"sorda o sonora secondo la posizione", example:"sole / rosa"},
+        {letter:"t", desc:"come in spagnolo", example:"tavolo"},
+        {letter:"u", desc:"come in spagnolo", example:"uva"},
+        {letter:"v", desc:"come la 'v' spagnola labiodentale", example:"vino"},
+        {letter:"z", desc:"può essere sorda 'ts' o sonora 'dz'", example:"pizza / zero"}
+      ],
+      specialSounds: [
+        {letter:"gn", desc:"suono della 'ñ' spagnola", example:"gnocchi"},
+        {letter:"gl+i", desc:"suono palatale, simile a 'll' spagnola", example:"famiglia"},
+        {letter:"sc+e/i", desc:"suono 'sh' inglese", example:"pesce"},
+        {letter:"ch", desc:"suono di 'k' davanti a e/i", example:"chiaro"},
+        {letter:"doppie", desc:"consonanti doppie: si pronunciano più lunghe/intense", example:"palla, mamma"}
+      ],
+      accentNote: "L'accento (à, è, é, ì, ò, ù) si scrive di solito solo sull'ultima vocale quando è tonica (città, perché). Le altre parole non portano accenti scritti, anche se hanno una sillaba tonica.",
+      grammar: []
+    },
+    written: [
+      {type:"mcq", q:"Quale combinazione di lettere italiane suona come la 'ñ' spagnola?", opts:["gn","gl","sc"], correct:0},
+      {type:"mcq", q:"Che suono ha 'sc' davanti a 'e' o 'i' (es. pesce)?", opts:["sh","sk","s"], correct:0},
+      {type:"mcq", q:"La 'h' italiana...", opts:["è muta","suona come la 'j'","suona come la 'k'"], correct:0},
+      {type:"mcq", q:"Quale parola ha il suono palatale 'gli'?", opts:["famiglia","gatto","gelato"], correct:0},
+      {type:"mcq", q:"Come si pronuncia la 'g' davanti a 'e' o 'i' (es. gelato)?", opts:["come la 'j' inglese","come la 'g' di gatto","muta"], correct:0},
+      {type:"mcq", q:"Quale combinazione troviamo nella parola 'gnocchi'?", opts:["gn","gl","sc"], correct:0},
+      {type:"mcq", q:"Le consonanti doppie (es. 'palla') si pronunciano...", opts:["più lunghe e intense","uguali a una sola","mute"], correct:0},
+      {type:"mcq", q:"La 'c' in 'cena' suona come...", opts:["'ch' spagnola","'k'","'s'"], correct:0}
+    ],
+    oral: [
+      {ca:"amico", es:"amigo"},
+      {ca:"gelato", es:"helado"},
+      {ca:"famiglia", es:"familia"},
+      {ca:"gnocchi", es:"ñoquis"},
+      {ca:"pesce", es:"pescado"},
+      {ca:"chiaro", es:"claro"}
+    ],
+    quiz: [
+      {q:"Quale lettera italiana non esiste come tale in spagnolo?", opts:["nessuna, l'alfabeto è quasi identico","la ñ","la ç"], correct:0},
+      {q:"Come suona la 'z' in 'pizza'?", opts:["'ts' sorda","come la 's' spagnola","come la 'd' spagnola"], correct:0},
+      {q:"Che suono fa 'sc' in 'pesce'?", opts:["sh","sk","s"], correct:0},
+      {q:"Le doppie consonanti (es. 'mamma') indicano che...", opts:["il suono è più lungo e intenso","la sillaba è muta","la parola è plurale"], correct:0},
+      {q:"Quale combinazione si scrive con suono palatale simile a 'll'?", opts:["gli","gn","sc"], correct:0},
+      {q:"La lettera \"h\" italiana...", opts:["è muta","suona forte","suona come 'j'"], correct:0},
+      {q:"Come suona la \"g\" in \"gelato\"?", opts:["come la 'j' inglese","come la 'g' di gatto","muta"], correct:0},
+      {q:"Quale combinazione suona come la \"ch\" spagnola davanti a e/i?", opts:["c","ch","q"], correct:0},
+      {q:"La \"gli\" di \"famiglia\" ha un suono...", opts:["palatale","uguale a una 'l' semplice","muto"], correct:0},
+      {q:"La \"z\" può essere sorda o sonora, come in...", opts:["pizza / zero","gatto / gelato","sole / rosa"], correct:0}
+    ]
+  },
+  {
+    id: 0.3,
+    title: "Frasi di sopravvivenza in classe",
+    image: `<svg viewBox="0 0 400 200"><rect x="100" y="40" width="200" height="90" rx="20" fill="#D9A441"/><polygon points="150,130 180,130 160,155" fill="#D9A441"/><text x="200" y="102" font-size="60" font-weight="700" fill="#1B2B3A" text-anchor="middle">?</text><ellipse cx="320" cy="130" rx="22" ry="28" fill="#E8C39E"/><rect x="305" y="80" width="10" height="40" rx="5" fill="#E8C39E"/><rect x="318" y="72" width="10" height="48" rx="5" fill="#E8C39E"/><rect x="331" y="76" width="10" height="44" rx="5" fill="#E8C39E"/><rect x="344" y="85" width="10" height="35" rx="5" fill="#E8C39E"/><rect x="310" y="150" width="24" height="40" rx="8" fill="#2C5F7C"/></svg>`,
+    theory: {
+      intro: "Prima di continuare, queste frasi ti serviranno in tutte le unità: chiedere aiuto, dire che non capisci qualcosa e chiedere come si dice una parola.",
+      grammar: [
+        {label:"Espressioni per chiedere aiuto", rows:[
+          ["Non capisco.","No entiendo."],
+          ["Può ripetere, per favore?","¿Puede repetir, por favor?"],
+          ["Può parlare più lentamente?","¿Puede hablar más despacio?"],
+          ["Come si dice \"gracias\" in italiano?","¿Cómo se dice \"gracias\" en italiano?"],
+          ["Cosa significa questa parola?","¿Qué significa esta palabra?"],
+          ["Come si scrive?","¿Cómo se escribe?"],
+          ["Posso fare una domanda?","¿Puedo hacer una pregunta?"],
+          ["Non lo so.","No lo sé."]
+        ], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"no entiendo\" in italiano?", opts:["Non capisco","Non lo so","Non parlo"], correct:0},
+      {type:"mcq", q:"Cosa dici se vuoi che ripetano una frase?", opts:["Può ripetere?","Come si scrive?","Posso?"], correct:0},
+      {type:"mcq", q:"Come chiedi il significato di una parola?", opts:["Cosa significa?","Come si chiama?","Che ore sono?"], correct:0},
+      {type:"text", q:"Traduci: \"¿Cómo se dice 'gracias' en italiano?\"", answer:"come si dice gracias in italiano"},
+      {type:"mcq", q:"Se non sai qualcosa, rispondi...", opts:["Non lo so","Non capisco","Va bene"], correct:0},
+      {type:"mcq", q:"Come chiedi di parlare più piano?", opts:["Può parlare più lentamente?","Può ripetere?","Come si scrive?"], correct:0},
+      {type:"mcq", q:"Per chiedere il permesso di parlare usi...", opts:["Posso fare una domanda?","Non capisco","Cosa significa?"], correct:0},
+      {type:"text", q:"Come si scrive \"gracias\" in italiano?", answer:"grazie"}
+    ],
+    oral: [
+      {ca:"Non capisco.", es:"No entiendo."},
+      {ca:"Può ripetere, per favore?", es:"¿Puede repetir, por favor?"},
+      {ca:"Come si dice \"casa\" in italiano?", es:"¿Cómo se dice \"casa\" en italiano?"},
+      {ca:"Cosa significa questa parola?", es:"¿Qué significa esta palabra?"},
+      {ca:"Come si scrive?", es:"¿Cómo se escribe?"},
+      {ca:"Non lo so.", es:"No lo sé."}
+    ],
+    quiz: [
+      {q:"Come si dice \"no entiendo\" in italiano?", opts:["Non capisco","Non lo so","Non parlo"], correct:0},
+      {q:"Quale frase usi per chiedere di ripetere?", opts:["Può ripetere?","Cosa significa?","Come si scrive?"], correct:0},
+      {q:"Come chiedi come si scrive una parola?", opts:["Come si scrive?","Come si dice?","Cosa significa?"], correct:0},
+      {q:"\"Cosa significa questa parola?\" si usa per chiedere...", opts:["il significato","la pronuncia","la scrittura"], correct:0},
+      {q:"Come chiedi il permesso di fare una domanda?", opts:["Posso fare una domanda?","Non capisco","Va bene"], correct:0},
+      {q:"\"Può parlare più lentamente?\" si usa quando...", opts:["parlano troppo veloce","non capisci una parola","vuoi ripetere"], correct:0},
+      {q:"Se non conosci la risposta dici...", opts:["Non lo so","Non capisco","Cosa significa?"], correct:0},
+      {q:"Come chiedi la traduzione di una parola spagnola?", opts:["Come si dice \"X\" in italiano?","Cosa significa \"X\"?","Come si scrive \"X\"?"], correct:0},
+      {q:"\"Grazie\" corrisponde a...", opts:["gracias","por favor","de nada"], correct:0},
+      {q:"Quale frase è più formale/educata per chiedere ripetizione?", opts:["Può ripetere, per favore?","Ripeti!","Cosa?"], correct:0}
+    ]
+  },
+  {
+    id: 0.5,
+    title: "I giorni e i mesi",
+    image: `<svg viewBox="0 0 400 200"><rect x="120" y="20" width="160" height="140" rx="12" fill="#FFFDF7" stroke="#1B2B3A22" stroke-width="2"/><rect x="120" y="20" width="160" height="35" rx="12" fill="#A85030"/><g fill="#D9A441"><rect x="145" y="65" width="20" height="20" rx="4"/><rect x="180" y="65" width="20" height="20" rx="4"/><rect x="215" y="65" width="20" height="20" rx="4"/><rect x="145" y="100" width="20" height="20" rx="4"/><rect x="215" y="100" width="20" height="20" rx="4"/></g><rect x="180" y="100" width="20" height="20" rx="4" fill="#2C5F7C"/><rect x="145" y="135" width="20" height="20" rx="4" fill="#D9A441"/><rect x="180" y="135" width="20" height="20" rx="4" fill="#D9A441"/><rect x="215" y="135" width="20" height="20" rx="4" fill="#D9A441"/></svg>`,
+    theory: {
+      intro: "I giorni della settimana e i mesi dell'anno sono parole di base che userai ogni giorno.",
+      grammar: [
+        {label:"I giorni della settimana", rows:[
+          ["lunedì","lunes"],["martedì","martes"],["mercoledì","miércoles"],["giovedì","jueves"],
+          ["venerdì","viernes"],["sabato","sábado"],["domenica","domingo"]
+        ], audio:true, audioCol:0, note:"In italiano i giorni si scrivono con la lettera minuscola e non prendono l'articolo davanti quando indicano 'oggi è...' (Oggi è lunedì)."},
+        {label:"I mesi dell'anno", rows:[
+          ["gennaio","enero"],["febbraio","febrero"],["marzo","marzo"],["aprile","abril"],
+          ["maggio","mayo"],["giugno","junio"],["luglio","julio"],["agosto","agosto"],
+          ["settembre","septiembre"],["ottobre","octubre"],["novembre","noviembre"],["dicembre","diciembre"]
+        ], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Che giorno viene dopo lunedì?", opts:["martedì","mercoledì","domenica"], correct:0},
+      {type:"mcq", q:"Qual è il primo giorno del weekend?", opts:["sabato","venerdì","domenica"], correct:0},
+      {type:"text", q:"Scrivi il mese dopo giugno.", answer:"luglio"},
+      {type:"mcq", q:"Quale mese ha solo 28 o 29 giorni?", opts:["febbraio","aprile","settembre"], correct:0},
+      {type:"mcq", q:"L'ultimo mese dell'anno è...", opts:["dicembre","novembre","gennaio"], correct:0},
+      {type:"text", q:"Scrivi il giorno prima di venerdì.", answer:"giovedì"},
+      {type:"mcq", q:"Quale giorno è il quarto della settimana (lunedì=1)?", opts:["giovedì","mercoledì","venerdì"], correct:0},
+      {type:"mcq", q:"Il primo mese dell'anno è...", opts:["gennaio","dicembre","marzo"], correct:0}
+    ],
+    oral: [
+      {ca:"Oggi è lunedì.", es:"Hoy es lunes."},
+      {ca:"Il mio compleanno è a marzo.", es:"Mi cumpleaños es en marzo."},
+      {ca:"Il weekend è sabato e domenica.", es:"El fin de semana es sábado y domingo."},
+      {ca:"Dicembre è l'ultimo mese dell'anno.", es:"Diciembre es el último mes del año."},
+      {ca:"Lavoro dal lunedì al venerdì.", es:"Trabajo de lunes a viernes."},
+      {ca:"Agosto è un mese estivo.", es:"Agosto es un mes de verano."}
+    ],
+    quiz: [
+      {q:"Quanti giorni ha una settimana?", opts:["sette","cinque","sei"], correct:0},
+      {q:"Che giorno viene prima di mercoledì?", opts:["martedì","giovedì","lunedì"], correct:0},
+      {q:"Quale mese viene dopo aprile?", opts:["maggio","marzo","giugno"], correct:0},
+      {q:"Il weekend in italiano è composto da...", opts:["sabato e domenica","venerdì e sabato","domenica e lunedì"], correct:0},
+      {q:"Quanti mesi ha un anno?", opts:["dodici","dieci","undici"], correct:0},
+      {q:"Quale mese ha meno giorni?", opts:["febbraio","gennaio","marzo"], correct:0},
+      {q:"L'ultimo giorno della settimana lavorativa è...", opts:["venerdì","sabato","giovedì"], correct:0},
+      {q:"Settembre viene dopo...", opts:["agosto","luglio","ottobre"], correct:0},
+      {q:"Il primo giorno della settimana in Italia è...", opts:["lunedì","domenica","sabato"], correct:0},
+      {q:"Quale mese chiude l'estate?", opts:["settembre","giugno","dicembre"], correct:0}
+    ]
+  },
+  {
+    id: 1,
+    title: "Presentarsi",
+    image: `<svg viewBox="0 0 400 200"><circle cx="140" cy="90" r="35" fill="#E8C39E"/><rect x="115" y="120" width="50" height="70" rx="15" fill="#2C5F7C"/><circle cx="260" cy="90" r="35" fill="#E8C39E"/><rect x="235" y="120" width="50" height="70" rx="15" fill="#A85030"/><path d="M175 100 Q 200 80 225 100" stroke="#D9A441" stroke-width="4" fill="none"/></svg>`,
+    theory: {
+      intro: "Per presentarti in italiano hai bisogno del verbo essere, del verbo chiamarsi (per il nome) e di alcune domande di base.",
+      grammar: [
+        {label:"Essere (presente)", rows:[["io sono","yo soy"],["tu sei","tú eres"],["lui/lei è","él/ella es"],["noi siamo","nosotros somos"],["voi siete","vosotros sois"],["loro sono","ellos son"]], audio:true, audioCol:0},
+        {label:"Chiamarsi (presente)", rows:[["io mi chiamo","yo me llamo"],["tu ti chiami","tú te llamas"],["lui/lei si chiama","él/ella se llama"],["noi ci chiamiamo","nosotros nos llamamos"],["voi vi chiamate","vosotros os llamáis"],["loro si chiamano","ellos se llaman"]], audio:true, audioCol:0, note:"Chiamarsi è un verbo riflessivo: si usa sempre con il pronome (mi, ti, si, ci, vi, si)."},
+        {label:"Domande di base", rows:[
+          ["Come ti chiami?","¿Cómo te llamas?"],
+          ["Di dove sei?","¿De dónde eres?"],
+          ["Quanti anni hai?","¿Cuántos años tienes?"],
+          ["Piacere!","¡Encantado/a!"]
+        ], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"me llamo\" in italiano?", opts:["mi chiamo","ti chiami","si chiama"], correct:0},
+      {type:"text", q:"Completa: Io ______ Marco. (chiamarsi)", answer:"mi chiamo"},
+      {type:"mcq", q:"Qual è la forma corretta di essere per \"tu\"?", opts:["sei","è","sono"], correct:0},
+      {type:"mcq", q:"Come chiedi il nome a qualcuno?", opts:["Come ti chiami?","Di dove sei?","Come stai?"], correct:0},
+      {type:"text", q:"Completa: Noi ______ di Barcellona. (essere)", answer:"siamo"},
+      {type:"mcq", q:"Come rispondi a \"Come ti chiami?\"", opts:["Mi chiamo Anna","Sto bene","Ho 20 anni"], correct:0},
+      {type:"mcq", q:"\"Piacere!\" si usa quando...", opts:["conosci qualcuno per la prima volta","saluti un amico","dici addio"], correct:0},
+      {type:"text", q:"Completa: Loro ______ spagnoli. (essere)", answer:"sono"}
+    ],
+    oral: [
+      {ca:"Come ti chiami?", es:"¿Cómo te llamas?"},
+      {ca:"Mi chiamo Laura.", es:"Me llamo Laura."},
+      {ca:"Di dove sei?", es:"¿De dónde eres?"},
+      {ca:"Sono di Barcellona.", es:"Soy de Barcelona."},
+      {ca:"Quanti anni hai?", es:"¿Cuántos años tienes?"},
+      {ca:"Ho ventotto anni.", es:"Tengo veintiocho años."},
+      {ca:"Piacere di conoscerti!", es:"¡Encantado/a de conocerte!"}
+    ],
+    quiz: [
+      {q:"Come si dice \"soy de Barcelona\" in italiano?", opts:["Sono di Barcellona","Sto a Barcellona","Vivo Barcellona"], correct:0},
+      {q:"Qual è la forma corretta di chiamarsi per \"lui\"?", opts:["si chiama","ti chiami","mi chiamo"], correct:0},
+      {q:"Come chiedi l'età a qualcuno?", opts:["Quanti anni hai?","Come ti chiami?","Di dove sei?"], correct:0},
+      {q:"Completa: Tu ______ italiano. (essere)", opts:["sei","è","sono"], correct:0},
+      {q:"\"Piacere!\" corrisponde a...", opts:["¡Encantado!","¡Hola!","¡Adiós!"], correct:0},
+      {q:"Come si dice \"nosotros somos\" in italiano?", opts:["noi siamo","voi siete","loro sono"], correct:0},
+      {q:"Il verbo chiamarsi è...", opts:["riflessivo","irregolare solo al plurale","un sostantivo"], correct:0},
+      {q:"Completa: Io ______ Marco e ______ ventotto anni.", opts:["mi chiamo / ho","sono / sono","chiamo / sono"], correct:0},
+      {q:"Come chiedi la provenienza di qualcuno?", opts:["Di dove sei?","Come stai?","Quanti anni hai?"], correct:0},
+      {q:"Qual è la forma corretta di essere per \"voi\"?", opts:["siete","siamo","sono"], correct:0}
+    ]
+  },
+  {
+    id: 1.5,
+    title: "Paesi, nazionalità e lingue",
+    image: `<svg viewBox="0 0 400 200"><circle cx="200" cy="100" r="70" fill="#2C5F7C"/><path d="M150 60 Q 200 40 250 60 Q 260 100 250 140 Q 200 160 150 140 Q 140 100 150 60" fill="#5B7F4B"/><circle cx="180" cy="80" r="8" fill="#D9A441"/><circle cx="230" cy="120" r="6" fill="#A85030"/></svg>`,
+    theory: {
+      intro: "Per parlare di nazionalità e lingue, l'italiano usa aggettivi che concordano in genere e numero con la persona.",
+      grammar: [
+        {label:"Nazionalità (esempi)", rows:[
+          ["spagnolo / spagnola","español / española"],
+          ["italiano / italiana","italiano / italiana"],
+          ["francese / francese","francés / francesa"],
+          ["inglese / inglese","inglés / inglesa"],
+          ["tedesco / tedesca","alemán / alemana"],
+          ["portoghese / portoghese","portugués / portuguesa"]
+        ], note:"Gli aggettivi che finiscono in -o hanno il femminile in -a (italiano/italiana). Quelli che finiscono in -e sono invariabili (francese, inglese)."},
+        {label:"Parlare (presente)", rows:[["io parlo","yo hablo"],["tu parli","tú hablas"],["lui/lei parla","él/ella habla"],["noi parliamo","nosotros hablamos"],["voi parlate","vosotros habláis"],["loro parlano","ellos hablan"]], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Qual è il femminile di \"italiano\"?", opts:["italiana","italiano","italiane"], correct:0},
+      {type:"mcq", q:"Come si dice \"hablo español\" in italiano?", opts:["Parlo spagnolo","Sono spagnolo","Vivo in Spagna"], correct:0},
+      {type:"mcq", q:"Quale aggettivo di nazionalità è invariabile?", opts:["francese","italiano","spagnolo"], correct:0},
+      {type:"text", q:"Completa: Lei ______ tedesco e inglese. (parlare)", answer:"parla"},
+      {type:"mcq", q:"Come si dice \"soy de Italia\" in italiano?", opts:["Sono italiano/a","Parlo italiano","Vivo in Italia"], correct:0},
+      {type:"text", q:"Qual è il femminile di \"tedesco\"?", answer:"tedesca"},
+      {type:"mcq", q:"Completa: Noi ______ tre lingue. (parlare)", opts:["parliamo","parlate","parlano"], correct:0},
+      {type:"mcq", q:"\"Portoghese\" si riferisce a chi viene da...", opts:["Portogallo","Spagna","Francia"], correct:0}
+    ],
+    oral: [
+      {ca:"Sono spagnolo.", es:"Soy español."},
+      {ca:"Parlo italiano e spagnolo.", es:"Hablo italiano y español."},
+      {ca:"Di dove sei?", es:"¿De dónde eres?"},
+      {ca:"Vengo dalla Francia.", es:"Vengo de Francia."},
+      {ca:"Lei è tedesca.", es:"Ella es alemana."},
+      {ca:"Parlate inglese?", es:"¿Habláis inglés?"}
+    ],
+    quiz: [
+      {q:"Qual è il femminile di \"spagnolo\"?", opts:["spagnola","spagnole","spagnolo"], correct:0},
+      {q:"Come si dice \"hablamos italiano\" in italiano?", opts:["Parliamo italiano","Siamo italiani","Viviamo in Italia"], correct:0},
+      {q:"Quale di queste nazionalità è invariabile al femminile?", opts:["inglese","spagnolo","tedesco"], correct:0},
+      {q:"Completa: Tu ______ francese? (parlare)", opts:["parli","parla","parlo"], correct:0},
+      {q:"\"Tedesco\" si riferisce a chi viene da...", opts:["Germania","Austria","Svizzera"], correct:0},
+      {q:"Come chiedi a qualcuno che lingue parla?", opts:["Che lingue parli?","Di dove sei?","Come ti chiami?"], correct:0},
+      {q:"Qual è il maschile plurale di \"italiana\"?", opts:["italiani","italiano","italiane"], correct:0},
+      {q:"Come si dice \"vengo de España\" in italiano?", opts:["Vengo dalla Spagna","Sono in Spagna","Parlo spagnolo"], correct:0},
+      {q:"Completa: Loro ______ portoghese. (parlare)", opts:["parlano","parla","parliamo"], correct:0},
+      {q:"Quale lingua NON è tra le esemplificate nella lezione?", opts:["giapponese","francese","tedesco"], correct:0}
+    ]
+  },
+  {
+    id: 2,
+    title: "La famiglia",
+    image: `<svg viewBox="0 0 400 200"><rect x="60" y="120" width="280" height="60" rx="10" fill="#5B7F4B"/><polygon points="200,40 60,120 340,120" fill="#A85030"/><circle cx="140" cy="150" r="18" fill="#E8C39E"/><circle cx="200" cy="150" r="22" fill="#E8C39E"/><circle cx="260" cy="150" r="18" fill="#E8C39E"/></svg>`,
+    theory: {
+      intro: "Per parlare della famiglia usiamo i possessivi e i nomi di parentela. In italiano i possessivi vanno di solito con l'articolo, tranne con i nomi singolari di famiglia stretta (mio padre, non il mio padre).",
+      grammar: [
+        {label:"Membri della famiglia", rows:[
+          ["il padre","el padre"],["la madre","la madre"],["il fratello","el hermano"],["la sorella","la hermana"],
+          ["il figlio","el hijo"],["la figlia","la hija"],["il nonno","el abuelo"],["la nonna","la abuela"],
+          ["lo zio","el tío"],["la zia","la tía"],["il cugino","el primo"],["la cugina","la prima"],
+          ["il marito","el marido"],["la moglie","la esposa"]
+        ], audio:true, audioCol:0},
+        {label:"Possessivi", rows:[
+          ["mio padre / mia madre","mi padre / mi madre"],
+          ["il mio amico / la mia amica","mi amigo / mi amiga"],
+          ["tuo fratello / tua sorella","tu hermano / tu hermana"],
+          ["suo figlio / sua figlia","su hijo / su hija"]
+        ], note:"Con i nomi singolari di famiglia stretta (padre, madre, fratello, sorella, figlio, figlia, nonno, nonna, marito, moglie senza aggettivi) non si usa l'articolo: mio padre. Con gli altri nomi sì: il mio amico."}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"mi hermana\" in italiano?", opts:["mia sorella","mio fratello","mia madre"], correct:0},
+      {type:"mcq", q:"Qual è la forma corretta con \"padre\"?", opts:["mio padre","il mio padre","la mia padre"], correct:0},
+      {type:"text", q:"Scrivi: \"il figlio di mio zio\" si chiama...", answer:"cugino"},
+      {type:"mcq", q:"Come si dice \"mi amigo\" in italiano?", opts:["il mio amico","mio amico","la mia amico"], correct:0},
+      {type:"mcq", q:"Il femminile di \"nonno\" è...", opts:["nonna","nonne","nonni"], correct:0},
+      {type:"text", q:"Completa: ______ madre lavora in ospedale. (mia)", answer:"mia"},
+      {type:"mcq", q:"Come si dice \"mi marido\"?", opts:["mio marito","mia moglie","mio fratello"], correct:0},
+      {type:"mcq", q:"La sorella di tua madre è tua...", opts:["zia","cugina","nonna"], correct:0}
+    ],
+    oral: [
+      {ca:"Questa è mia sorella.", es:"Esta es mi hermana."},
+      {ca:"Mio padre lavora molto.", es:"Mi padre trabaja mucho."},
+      {ca:"Ho due fratelli.", es:"Tengo dos hermanos."},
+      {ca:"I miei nonni vivono a Roma.", es:"Mis abuelos viven en Roma."},
+      {ca:"Mia moglie si chiama Elena.", es:"Mi esposa se llama Elena."},
+      {ca:"Il mio migliore amico è simpatico.", es:"Mi mejor amigo es simpático."}
+    ],
+    quiz: [
+      {q:"Come si dice \"mi padre\" in italiano?", opts:["mio padre","il mio padre","mia padre"], correct:0},
+      {q:"Il figlio di tuo fratello è tuo...", opts:["nipote","cugino","zio"], correct:0},
+      {q:"Come si dice \"mi mejor amiga\"?", opts:["la mia migliore amica","mia migliore amica","il mio migliore amica"], correct:0},
+      {q:"Qual è il femminile di \"marito\"?", opts:["moglie","marita","mogli"], correct:0},
+      {q:"Con quale nome di famiglia NON si usa l'articolo?", opts:["padre","amico","cugino"], correct:0},
+      {q:"Come si dice \"tus abuelos\"?", opts:["i tuoi nonni","le tue nonne","i tuoi nonno"], correct:0},
+      {q:"La madre di tuo padre è tua...", opts:["nonna","zia","cugina"], correct:0},
+      {q:"Come si dice \"su hermano\" (di lei)?", opts:["suo fratello","sua fratello","suo sorella"], correct:0},
+      {q:"Il fratello di tua madre è tuo...", opts:["zio","nonno","cugino"], correct:0},
+      {q:"Come si dice \"nuestra familia\"?", opts:["la nostra famiglia","la vostra famiglia","la loro famiglia"], correct:0}
+    ]
+  },
+  {
+    id: 3.5,
+    title: "I gusti e il tempo libero",
+    image: `<svg viewBox="0 0 400 200"><rect x="150" y="30" width="100" height="90" rx="10" fill="#D9A441"/><circle cx="200" cy="75" r="30" fill="#FFFDF7"/><path d="M180 75 A20 20 0 0 1 220 75" stroke="#A85030" stroke-width="5" fill="none"/><rect x="120" y="140" width="160" height="50" rx="10" fill="#2C5F7C"/></svg>`,
+    theory: {
+      intro: "Per parlare dei gusti e del tempo libero usiamo la costruzione mi piace/mi piacciono, i quantificatori e le espressioni per mostrare accordo o disaccordo.",
+      grammar: [
+        {label:"Mi piace / Mi piacciono", rows:[
+          ["mi piace il cinema","me gusta el cine"],["ti piace la musica","te gusta la música"],
+          ["gli piace lo sport","le gusta el deporte (a él)"],["le piace leggere","le gusta leer (a ella)"],
+          ["ci piace viaggiare","nos gusta viajar"],["mi piacciono i libri","me gustan los libros"]
+        ], note:"Il verbo piacere concorda con la cosa che piace (singolare o plurale), non con la persona: Mi piace il cinema ma Mi piacciono i libri."},
+        {label:"Quantificatori", rows:[["molto","mucho"],["poco","poco"],["abbastanza","bastante"],["per niente","para nada"]], audio:true, audioCol:0},
+        {label:"Accordo e disaccordo", rows:[["Anche a me!","¡A mí también!"],["A me no.","A mí no."],["Neanche a me.","A mí tampoco."]]}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"me gusta el cine\"?", opts:["Mi piace il cinema","Mi piacciono il cinema","Mi piace i cinema"], correct:0},
+      {type:"mcq", q:"Come si dice \"me gustan los libros\"?", opts:["Mi piacciono i libri","Mi piace i libri","Mi piace il libro"], correct:0},
+      {type:"text", q:"Completa: A lui ______ lo sport. (piacere)", answer:"piace"},
+      {type:"mcq", q:"Se qualcuno dice \"Mi piace la musica\" e sei d'accordo, dici...", opts:["Anche a me!","A me no","Neanche a me"], correct:0},
+      {type:"mcq", q:"Il verbo piacere concorda con...", opts:["la cosa che piace","la persona","sempre singolare"], correct:0},
+      {type:"text", q:"Completa: Non mi piace ______ (per niente/molto) il calcio.", answer:"per niente"},
+      {type:"mcq", q:"Come si dice \"nos gusta viajar\"?", opts:["Ci piace viaggiare","Vi piace viaggiare","Ci piacciono viaggiare"], correct:0},
+      {type:"mcq", q:"Se non ti piace qualcosa e nemmeno all'altra persona, dici...", opts:["Neanche a me","Anche a me","A me sì"], correct:0}
+    ],
+    oral: [
+      {ca:"Mi piace leggere.", es:"Me gusta leer."},
+      {ca:"Non mi piace per niente il calcio.", es:"No me gusta nada el fútbol."},
+      {ca:"Ti piace la musica?", es:"¿Te gusta la música?"},
+      {ca:"Sì, mi piace molto.", es:"Sí, me gusta mucho."},
+      {ca:"Anche a me!", es:"¡A mí también!"},
+      {ca:"Ci piace viaggiare insieme.", es:"Nos gusta viajar juntos."}
+    ],
+    quiz: [
+      {q:"Come si dice \"me gusta bailar\"?", opts:["Mi piace ballare","Mi piacciono ballare","Mi piace balli"], correct:0},
+      {q:"Come si dice \"le gustan los deportes\" (a lei)?", opts:["Le piacciono gli sport","Le piace gli sport","Gli piacciono gli sport"], correct:0},
+      {q:"Quale quantificatore significa \"para nada\"?", opts:["per niente","molto","abbastanza"], correct:0},
+      {q:"Come rispondi se non sei d'accordo e a te non piace nemmeno?", opts:["Neanche a me","Anche a me","A me sì"], correct:0},
+      {q:"Il verbo piacere si coniuga secondo...", opts:["l'oggetto che piace","il soggetto grammaticale","sempre alla terza persona plurale"], correct:0},
+      {q:"Come si dice \"nos gusta el cine\"?", opts:["Ci piace il cinema","Vi piace il cinema","Ci piacciono il cinema"], correct:0},
+      {q:"Quale espressione mostra accordo positivo?", opts:["Anche a me","Neanche a me","A me no"], correct:0},
+      {q:"Come si dice \"te gustan los libros\"?", opts:["Ti piacciono i libri","Ti piace i libri","Ti piacciono il libro"], correct:0},
+      {q:"\"Abbastanza\" significa...", opts:["bastante","mucho","nada"], correct:0},
+      {q:"Come si dice \"les gusta viajar\" (a loro)?", opts:["Gli piace viaggiare","Gli piacciono viaggiare","Ci piace viaggiare"], correct:0}
+    ]
+  },
+  {
+    id: 4,
+    title: "I numeri e l'età",
+    image: `<svg viewBox="0 0 400 200"><rect x="80" y="60" width="240" height="90" rx="14" fill="#FFFDF7" stroke="#1B2B3A22" stroke-width="2"/><text x="140" y="120" font-size="50" font-family="Georgia,serif" font-weight="700" fill="#2C5F7C" text-anchor="middle">2</text><text x="200" y="120" font-size="50" font-family="Georgia,serif" font-weight="700" fill="#A85030" text-anchor="middle">8</text><text x="260" y="120" font-size="50" font-family="Georgia,serif" font-weight="700" fill="#D9A441" text-anchor="middle">5</text></svg>`,
+    theory: {
+      intro: "I numeri in italiano si usano ogni giorno: per l'età, i prezzi, i telefoni. Con avere + anni esprimiamo l'età.",
+      grammar: [
+        {label:"Numeri 0-20", rows:[
+          ["zero","cero"],["uno","uno"],["due","dos"],["tre","tres"],["quattro","cuatro"],["cinque","cinco"],
+          ["sei","seis"],["sette","siete"],["otto","ocho"],["nove","nueve"],["dieci","diez"],
+          ["undici","once"],["dodici","doce"],["tredici","trece"],["quattordici","catorce"],["quindici","quince"],
+          ["sedici","dieciséis"],["diciassette","diecisiete"],["diciotto","dieciocho"],["diciannove","diecinueve"],["venti","veinte"]
+        ], audio:true, audioCol:0},
+        {label:"Decine", rows:[["trenta","treinta"],["quaranta","cuarenta"],["cinquanta","cincuenta"],["sessanta","sesenta"],["settanta","setenta"],["ottanta","ochenta"],["novanta","noventa"],["cento","cien"]], audio:true, audioCol:0, note:"Le decine perdono la vocale finale davanti a uno e otto: ventuno, ventotto, trentuno."},
+        {label:"Avere + anni", rows:[["Ho ventotto anni.","Tengo veintiocho años."],["Quanti anni hai?","¿Cuántos años tienes?"]], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"text", q:"Scrivi in lettere: 15", answer:"quindici"},
+      {type:"text", q:"Scrivi in lettere: 40", answer:"quaranta"},
+      {type:"mcq", q:"Come si dice \"tengo veinte años\"?", opts:["Ho vent'anni","Sono vent'anni","Ho venti anno"], correct:0},
+      {type:"text", q:"Scrivi in lettere: 21", answer:"ventuno"},
+      {type:"mcq", q:"Come chiedi l'età a qualcuno?", opts:["Quanti anni hai?","Come stai?","Che ore sono?"], correct:0},
+      {type:"text", q:"Scrivi in lettere: 100", answer:"cento"},
+      {type:"mcq", q:"Qual è il numero dopo diciannove?", opts:["venti","ventuno","diciotto"], correct:0},
+      {type:"text", q:"Scrivi in lettere: 28", answer:"ventotto"}
+    ],
+    oral: [
+      {ca:"Ho ventotto anni.", es:"Tengo veintiocho años."},
+      {ca:"Quanti anni hai?", es:"¿Cuántos años tienes?"},
+      {ca:"Il mio numero è zero tre due, sette otto nove.", es:"Mi número es cero tres dos, siete ocho nueve."},
+      {ca:"Ci sono trenta studenti.", es:"Hay treinta estudiantes."},
+      {ca:"Costa cinquanta euro.", es:"Cuesta cincuenta euros."},
+      {ca:"Ho quarantacinque anni.", es:"Tengo cuarenta y cinco años."}
+    ],
+    quiz: [
+      {q:"Come si scrive 17 in lettere?", opts:["diciassette","diciannove","diciotto"], correct:0},
+      {q:"Come si dice \"tengo treinta años\"?", opts:["Ho trent'anni","Sono trent'anni","Ho trenta anno"], correct:0},
+      {q:"Quale numero viene prima di venti?", opts:["diciannove","ventuno","diciotto"], correct:0},
+      {q:"Come si scrive 60 in lettere?", opts:["sessanta","settanta","sedici"], correct:0},
+      {q:"Le decine perdono la vocale finale davanti a...", opts:["uno e otto","due e tre","cinque e sei"], correct:0},
+      {q:"Come si dice \"cuarenta y cinco\"?", opts:["quarantacinque","quarantatré","cinquantaquattro"], correct:0},
+      {q:"Come chiedi l'età in modo informale?", opts:["Quanti anni hai?","Come ti chiami?","Di dove sei?"], correct:0},
+      {q:"Qual è il numero 100 in lettere?", opts:["cento","mille","dieci"], correct:0},
+      {q:"Come si scrive 12 in lettere?", opts:["dodici","tredici","undici"], correct:0},
+      {q:"Come si dice \"tiene ochenta años\"?", opts:["Ha ottant'anni","Ha ottanta anno","È ottant'anni"], correct:0}
+    ]
+  },
+  {
+    id: 4.5,
+    title: "La casa e gli oggetti",
+    image: `<svg viewBox="0 0 400 200"><polygon points="200,30 60,110 340,110" fill="#A85030"/><rect x="90" y="110" width="220" height="80" fill="#FFFDF7" stroke="#1B2B3A22" stroke-width="2"/><rect x="180" y="140" width="40" height="50" fill="#2C5F7C"/><rect x="110" y="130" width="35" height="35" fill="#D9A441"/><rect x="255" y="130" width="35" height="35" fill="#D9A441"/></svg>`,
+    theory: {
+      intro: "Per parlare della casa usiamo c'è/ci sono per dire che qualcosa esiste, e gli articoli per nominare gli oggetti.",
+      grammar: [
+        {label:"C'è / Ci sono", rows:[["C'è un tavolo.","Hay una mesa."],["Ci sono due sedie.","Hay dos sillas."]], note:"\"C'è\" si usa per il singolare, \"ci sono\" per il plurale. Non cambiano mai forma per il genere: C'è una sedia. / Ci sono due sedie."},
+        {label:"Stanze e oggetti della casa", rows:[
+          ["la cucina","la cocina"],["il soggiorno","el salón"],["la camera da letto","el dormitorio"],
+          ["il bagno","el baño"],["il tavolo","la mesa"],["la sedia","la silla"],["il divano","el sofá"],
+          ["il letto","la cama"],["il frigorifero","la nevera"],["la finestra","la ventana"]
+        ], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"hay una mesa\"?", opts:["C'è un tavolo","Ci sono un tavolo","È un tavolo"], correct:0},
+      {type:"mcq", q:"Come si dice \"hay dos sillas\"?", opts:["Ci sono due sedie","C'è due sedie","Sono due sedie"], correct:0},
+      {type:"text", q:"Dove dormi? Nella ______.", answer:"camera da letto"},
+      {type:"mcq", q:"Dove cucini di solito?", opts:["in cucina","in bagno","in soggiorno"], correct:0},
+      {type:"mcq", q:"Cosa usi per conservare il cibo freddo?", opts:["il frigorifero","il divano","il letto"], correct:0},
+      {type:"text", q:"Completa: ______ un divano nel soggiorno. (c'è/ci sono)", answer:"c'è"},
+      {type:"mcq", q:"Dove ti siedi a guardare la tv?", opts:["sul divano","nel letto","nel frigorifero"], correct:0},
+      {type:"mcq", q:"Come si dice \"la ventana\"?", opts:["la finestra","la porta","il tavolo"], correct:0}
+    ],
+    oral: [
+      {ca:"C'è un tavolo in cucina.", es:"Hay una mesa en la cocina."},
+      {ca:"Ci sono due sedie rosse.", es:"Hay dos sillas rojas."},
+      {ca:"Il divano è molto comodo.", es:"El sofá es muy cómodo."},
+      {ca:"La camera da letto è grande.", es:"El dormitorio es grande."},
+      {ca:"Il frigorifero è in cucina.", es:"La nevera está en la cocina."},
+      {ca:"Le finestre sono grandi.", es:"Las ventanas son grandes."}
+    ],
+    quiz: [
+      {q:"Come si dice \"hay una silla\"?", opts:["C'è una sedia","Ci sono una sedia","È una sedia"], correct:0},
+      {q:"\"Ci sono\" si usa con...", opts:["il plurale","il singolare","sempre gli oggetti"], correct:0},
+      {q:"Dove si trova di solito il divano?", opts:["in soggiorno","in bagno","in cucina"], correct:0},
+      {q:"Come si dice \"la cama\"?", opts:["il letto","la sedia","il tavolo"], correct:0},
+      {q:"Come si dice \"hay tres ventanas\"?", opts:["Ci sono tre finestre","C'è tre finestre","Sono tre finestre"], correct:0},
+      {q:"Dove ti lavi?", opts:["in bagno","in cucina","in soggiorno"], correct:0},
+      {q:"Come si dice \"el salón\"?", opts:["il soggiorno","la cucina","la camera"], correct:0},
+      {q:"\"C'è\" si usa con...", opts:["il singolare","il plurale","sempre le persone"], correct:0},
+      {q:"Cosa NON troveresti in cucina?", opts:["il letto","il frigorifero","il tavolo"], correct:0},
+      {q:"Come si dice \"la mesa\"?", opts:["il tavolo","la sedia","il divano"], correct:0}
+    ]
+  },
+  {
+    id: 5,
+    title: "Il tempo e il clima",
+    image: `<svg viewBox="0 0 400 200"><circle cx="140" cy="80" r="45" fill="#D9A441"/><g stroke="#D9A441" stroke-width="5"><line x1="140" y1="15" x2="140" y2="0"/><line x1="140" y1="145" x2="140" y2="160"/><line x1="75" y1="80" x2="60" y2="80"/><line x1="205" y1="80" x2="220" y2="80"/></g><ellipse cx="280" cy="100" rx="55" ry="30" fill="#FFFDF7" stroke="#1B2B3A15" stroke-width="2"/><line x1="250" y1="145" x2="240" y2="165" stroke="#2C5F7C" stroke-width="4"/><line x1="280" y1="145" x2="270" y2="165" stroke="#2C5F7C" stroke-width="4"/><line x1="310" y1="145" x2="300" y2="165" stroke="#2C5F7C" stroke-width="4"/></svg>`,
+    theory: {
+      intro: "Per parlare del tempo atmosferico usiamo il verbo fare in forma impersonale, oppure verbi come piovere e nevicare.",
+      grammar: [
+        {label:"Fare (impersonale) + tempo", rows:[["Fa caldo.","Hace calor."],["Fa freddo.","Hace frío."],["Fa bel tempo.","Hace buen tiempo."],["Fa brutto tempo.","Hace mal tiempo."]], audio:true, audioCol:0},
+        {label:"Altri verbi del tempo", rows:[["Piove.","Llueve."],["Nevica.","Nieva."],["C'è il sole.","Hay sol."],["C'è vento.","Hay viento."]], audio:true, audioCol:0},
+        {label:"Le stagioni", rows:[["l'inverno","el invierno"],["la primavera","la primavera"],["l'estate","el verano"],["l'autunno","el otoño"]], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"hace frío\"?", opts:["Fa freddo","È freddo","Ha freddo"], correct:0},
+      {type:"mcq", q:"Come si dice \"llueve\"?", opts:["Piove","Piove il","È pioggia"], correct:0},
+      {type:"text", q:"In inverno spesso ______. (nevicare)", answer:"nevica"},
+      {type:"mcq", q:"Quale stagione viene dopo l'inverno?", opts:["la primavera","l'estate","l'autunno"], correct:0},
+      {type:"mcq", q:"Come si dice \"hace buen tiempo\"?", opts:["Fa bel tempo","È bel tempo","Ha bel tempo"], correct:0},
+      {type:"text", q:"In estate di solito ______ caldo. (fare)", answer:"fa"},
+      {type:"mcq", q:"Quale stagione è tra l'estate e l'inverno?", opts:["l'autunno","la primavera","l'estate"], correct:0},
+      {type:"mcq", q:"Come si dice \"hay sol\"?", opts:["C'è il sole","Fa sole","È sole"], correct:0}
+    ],
+    oral: [
+      {ca:"Oggi fa molto caldo.", es:"Hoy hace mucho calor."},
+      {ca:"In inverno nevica in montagna.", es:"En invierno nieva en la montaña."},
+      {ca:"Domani pioverà.", es:"Mañana lloverá."},
+      {ca:"Mi piace la primavera.", es:"Me gusta la primavera."},
+      {ca:"C'è molto vento oggi.", es:"Hay mucho viento hoy."},
+      {ca:"In estate fa molto caldo.", es:"En verano hace mucho calor."}
+    ],
+    quiz: [
+      {q:"Come si dice \"hace calor\"?", opts:["Fa caldo","È caldo","Ha caldo"], correct:0},
+      {q:"Quale verbo si usa per la neve?", opts:["nevicare","piovere","fare"], correct:0},
+      {q:"La stagione più fredda è...", opts:["l'inverno","l'estate","la primavera"], correct:0},
+      {q:"Come si dice \"hace mal tiempo\"?", opts:["Fa brutto tempo","È brutto tempo","Ha brutto tempo"], correct:0},
+      {q:"Quale stagione viene prima dell'estate?", opts:["la primavera","l'autunno","l'inverno"], correct:0},
+      {q:"Come si dice \"hay viento\"?", opts:["C'è vento","Fa vento","È vento"], correct:0},
+      {q:"Il verbo \"piovere\" si usa in forma...", opts:["impersonale","riflessiva","plurale"], correct:0},
+      {q:"Quale stagione è associata alle foglie che cadono?", opts:["l'autunno","la primavera","l'estate"], correct:0},
+      {q:"Come si dice \"nieva mucho\"?", opts:["Nevica molto","Piove molto","Fa molto nevica"], correct:0},
+      {q:"L'espressione \"fa bel tempo\" indica...", opts:["che il clima è piacevole","che piove","che fa freddo"], correct:0}
+    ]
+  },
+  {
+    id: 6,
+    title: "La città e le indicazioni",
+    image: `<svg viewBox="0 0 400 200"><rect x="40" y="100" width="320" height="14" fill="#1B2B3A22"/><rect x="80" y="40" width="60" height="60" fill="#2C5F7C"/><rect x="180" y="20" width="60" height="80" fill="#A85030"/><rect x="280" y="55" width="50" height="45" fill="#D9A441"/><path d="M100 130 L300 130" stroke="#5B7F4B" stroke-width="8"/></svg>`,
+    theory: {
+      intro: "Per orientarti in città usiamo il verbo andare, le preposizioni di luogo e i numeri ordinali.",
+      grammar: [
+        {label:"Andare (presente)", rows:[["io vado","yo voy"],["tu vai","tú vas"],["lui/lei va","él/ella va"],["noi andiamo","nosotros vamos"],["voi andate","vosotros vais"],["loro vanno","ellos van"]], audio:true, audioCol:0},
+        {label:"Indicazioni e luoghi", rows:[
+          ["a destra","a la derecha"],["a sinistra","a la izquierda"],["dritto","recto"],
+          ["vicino a","cerca de"],["lontano da","lejos de"],["accanto a","al lado de"],
+          ["la piazza","la plaza"],["la strada","la calle"],["l'incrocio","el cruce"]
+        ], audio:true, audioCol:0},
+        {label:"Numeri ordinali", rows:[["primo/a","primero/a"],["secondo/a","segundo/a"],["terzo/a","tercero/a"],["quarto/a","cuarto/a"]], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"voy al centro\"?", opts:["Vado in centro","Vai in centro","Va in centro"], correct:0},
+      {type:"mcq", q:"Come si dice \"a la derecha\"?", opts:["a destra","a sinistra","dritto"], correct:0},
+      {type:"text", q:"Completa: Gira ______ all'incrocio. (a sinistra)", answer:"a sinistra"},
+      {type:"mcq", q:"Come si dice \"cerca de\"?", opts:["vicino a","lontano da","accanto a"], correct:0},
+      {type:"mcq", q:"Qual è la forma corretta di andare per \"noi\"?", opts:["andiamo","andate","vanno"], correct:0},
+      {type:"text", q:"Il piano dopo il secondo è il ______.", answer:"terzo"},
+      {type:"mcq", q:"Come si dice \"todo recto\"?", opts:["sempre dritto","a destra","vicino"], correct:0},
+      {type:"mcq", q:"Come si dice \"lejos de\"?", opts:["lontano da","vicino a","accanto a"], correct:0}
+    ],
+    oral: [
+      {ca:"Vado in centro.", es:"Voy al centro."},
+      {ca:"Gira a destra.", es:"Gira a la derecha."},
+      {ca:"È vicino alla piazza.", es:"Está cerca de la plaza."},
+      {ca:"Vai sempre dritto.", es:"Ve siempre recto."},
+      {ca:"Il museo è accanto alla banca.", es:"El museo está al lado del banco."},
+      {ca:"Dove si trova la stazione?", es:"¿Dónde está la estación?"}
+    ],
+    quiz: [
+      {q:"Come si dice \"gira a la izquierda\"?", opts:["Gira a sinistra","Gira a destra","Vai dritto"], correct:0},
+      {q:"Qual è la forma corretta di andare per \"tu\"?", opts:["vai","va","vado"], correct:0},
+      {q:"Come si dice \"al lado de\"?", opts:["accanto a","lontano da","vicino a"], correct:0},
+      {q:"Qual è il terzo numero ordinale?", opts:["terzo","secondo","quarto"], correct:0},
+      {q:"Come si dice \"la plaza\"?", opts:["la piazza","la strada","l'incrocio"], correct:0},
+      {q:"Come si dice \"lejos de\"?", opts:["lontano da","vicino a","accanto a"], correct:0},
+      {q:"Come si dice \"ellos van\"?", opts:["loro vanno","loro vado","loro andate"], correct:0},
+      {q:"\"Sempre dritto\" indica...", opts:["di continuare senza girare","di girare a destra","di fermarsi"], correct:0},
+      {q:"Come si dice \"el cruce\"?", opts:["l'incrocio","la piazza","la strada"], correct:0},
+      {q:"Qual è il primo numero ordinale?", opts:["primo","secondo","ultimo"], correct:0}
+    ]
+  },
+  {
+    id: 6.5,
+    title: "I vestiti e i colori",
+    image: `<svg viewBox="0 0 400 200"><rect x="140" y="30" width="120" height="140" rx="20" fill="#2C5F7C"/><rect x="100" y="50" width="40" height="80" rx="10" fill="#2C5F7C"/><rect x="260" y="50" width="40" height="80" rx="10" fill="#2C5F7C"/><circle cx="200" cy="20" r="18" fill="#E8C39E"/></svg>`,
+    theory: {
+      intro: "Per parlare dei vestiti usiamo il verbo indossare/portare, e gli aggettivi di colore che concordano in genere e numero.",
+      grammar: [
+        {label:"Indossare / Portare (presente)", rows:[["io porto","yo llevo"],["tu porti","tú llevas"],["lui/lei porta","él/ella lleva"],["noi portiamo","nosotros llevamos"],["voi portate","vosotros lleváis"],["loro portano","ellos llevan"]], audio:true, audioCol:0},
+        {label:"I colori", rows:[
+          ["rosso/a","rojo/a"],["blu","azul"],["verde","verde"],["giallo/a","amarillo/a"],
+          ["nero/a","negro/a"],["bianco/a","blanco/a"],["rosa","rosa"],["marrone","marrón"]
+        ], audio:true, audioCol:0, note:"Blu, verde, rosa e marrone sono invariabili o quasi invariabili. Gli altri concordano: rosso/rossa/rossi/rosse."},
+        {label:"Capi di vestiario", rows:[
+          ["la camicia","la camisa"],["i pantaloni","los pantalones"],["la gonna","la falda"],
+          ["le scarpe","los zapatos"],["la giacca","la chaqueta"],["il vestito","el vestido"]
+        ], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"llevo una camisa azul\"?", opts:["Porto una camicia blu","Porto un camicia blu","Porta una camicia blu"], correct:0},
+      {type:"mcq", q:"Qual è il femminile plurale di \"rosso\"?", opts:["rosse","rossi","rossa"], correct:0},
+      {type:"text", q:"Completa: Lei ______ una gonna gialla. (portare)", answer:"porta"},
+      {type:"mcq", q:"Come si dice \"los zapatos negros\"?", opts:["le scarpe nere","le scarpe neri","gli scarpe neri"], correct:0},
+      {type:"mcq", q:"Quale colore è invariabile?", opts:["blu","rosso","nero"], correct:0},
+      {type:"text", q:"Completa: Noi ______ i pantaloni verdi. (portare)", answer:"portiamo"},
+      {type:"mcq", q:"Come si dice \"la chaqueta\"?", opts:["la giacca","il vestito","la camicia"], correct:0},
+      {type:"mcq", q:"Qual è il maschile singolare di \"bianca\"?", opts:["bianco","bianchi","bianche"], correct:0}
+    ],
+    oral: [
+      {ca:"Porto una camicia bianca.", es:"Llevo una camisa blanca."},
+      {ca:"Le scarpe sono nere.", es:"Los zapatos son negros."},
+      {ca:"Mi piace il vestito rosso.", es:"Me gusta el vestido rojo."},
+      {ca:"Che colore preferisci?", es:"¿Qué color prefieres?"},
+      {ca:"I pantaloni sono blu.", es:"Los pantalones son azules."},
+      {ca:"Porta sempre una giacca marrone.", es:"Siempre lleva una chaqueta marrón."}
+    ],
+    quiz: [
+      {q:"Come si dice \"llevo pantalones verdes\"?", opts:["Porto pantaloni verdi","Porto pantaloni verde","Porta pantaloni verdi"], correct:0},
+      {q:"Qual è il femminile di \"nero\"?", opts:["nera","neri","nere"], correct:0},
+      {q:"Come si dice \"la falda amarilla\"?", opts:["la gonna gialla","il vestito giallo","la camicia gialla"], correct:0},
+      {q:"Quale di questi colori NON cambia al femminile?", opts:["blu","rosso","nero"], correct:0},
+      {q:"Come si dice \"llevan zapatos negros\"?", opts:["Portano scarpe nere","Portano scarpa nera","Porta scarpe nere"], correct:0},
+      {q:"Come si dice \"el vestido\"?", opts:["il vestito","la gonna","la giacca"], correct:0},
+      {q:"Qual è il plurale di \"la camicia\"?", opts:["le camicie","i camicie","le camicia"], correct:0},
+      {q:"Come si dice \"llevas una chaqueta marrón\"?", opts:["Porti una giacca marrone","Porto una giacca marrone","Porta una giacca marrone"], correct:0},
+      {q:"Qual è il maschile plurale di \"rossa\"?", opts:["rossi","rosse","rosso"], correct:0},
+      {q:"Come si dice \"los zapatos\"?", opts:["le scarpe","i vestiti","le camicie"], correct:0}
+    ]
+  },
+  {
+    id: 7,
+    title: "Il lavoro e gli orari",
+    image: `<svg viewBox="0 0 400 200"><circle cx="200" cy="100" r="70" fill="#FFFDF7" stroke="#1B2B3A22" stroke-width="4"/><line x1="200" y1="100" x2="200" y2="55" stroke="#2C5F7C" stroke-width="6"/><line x1="200" y1="100" x2="235" y2="100" stroke="#A85030" stroke-width="5"/><rect x="280" y="120" width="40" height="30" rx="4" fill="#D9A441"/></svg>`,
+    theory: {
+      intro: "Per parlare del lavoro e degli orari usiamo il sistema dei quarti per l'ora e i verbi potere, sapere, dovere.",
+      grammar: [
+        {label:"Che ore sono?", rows:[
+          ["È l'una.","Es la una."],["Sono le due.","Son las dos."],
+          ["È l'una e un quarto.","Es la una y cuarto."],["Sono le tre e mezza.","Son las tres y media."],
+          ["Sono le quattro meno un quarto.","Son las cuatro menos cuarto."]
+        ], audio:true, audioCol:0},
+        {label:"Potere, sapere, dovere", rows:[
+          ["posso / puoi / può","puedo / puedes / puede"],
+          ["so / sai / sa","sé / sabes / sabe"],
+          ["devo / devi / deve","debo / debes / debe"]
+        ], audio:true, audioCol:0, note:"Potere = poder (capacità/permesso). Sapere = saber (conoscenza/abilità). Dovere = deber (obbligo)."},
+        {label:"Espressioni di lavoro", rows:[["Si può fumare qui?","¿Se puede fumar aquí?"],["Bisogna prenotare.","Hay que reservar."]], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"son las tres y media\"?", opts:["Sono le tre e mezza","È le tre e mezza","Sono tre e mezza"], correct:0},
+      {type:"mcq", q:"Quale verbo esprime un'abilità?", opts:["sapere","potere","dovere"], correct:0},
+      {type:"text", q:"Completa: Io non ______ nuotare. (sapere)", answer:"so"},
+      {type:"mcq", q:"Come si dice \"puedo entrar?\"", opts:["Posso entrare?","So entrare?","Devo entrare?"], correct:0},
+      {type:"mcq", q:"Come si dice \"es la una y cuarto\"?", opts:["È l'una e un quarto","Sono l'una e un quarto","È l'una e quarti"], correct:0},
+      {type:"text", q:"Completa: Domani ______ lavorare presto. (dovere, io)", answer:"devo"},
+      {type:"mcq", q:"Quale verbo esprime un obbligo?", opts:["dovere","potere","sapere"], correct:0},
+      {type:"mcq", q:"Come si dice \"hay que reservar\"?", opts:["Bisogna prenotare","Si può prenotare","So prenotare"], correct:0}
+    ],
+    oral: [
+      {ca:"Che ore sono?", es:"¿Qué hora es?"},
+      {ca:"Sono le quattro meno un quarto.", es:"Son las cuatro menos cuarto."},
+      {ca:"Posso aiutarti?", es:"¿Puedo ayudarte?"},
+      {ca:"Non so parlare tedesco.", es:"No sé hablar alemán."},
+      {ca:"Devo lavorare fino a tardi.", es:"Debo trabajar hasta tarde."},
+      {ca:"Si può pagare con carta?", es:"¿Se puede pagar con tarjeta?"}
+    ],
+    quiz: [
+      {q:"Come si dice \"son las dos\"?", opts:["Sono le due","È le due","Sono due"], correct:0},
+      {q:"Quale verbo esprime capacità o permesso?", opts:["potere","sapere","dovere"], correct:0},
+      {q:"Come si dice \"debo trabajar\"?", opts:["Devo lavorare","Posso lavorare","So lavorare"], correct:0},
+      {q:"Come si dice \"es la una\"?", opts:["È l'una","Sono l'una","È le una"], correct:0},
+      {q:"Come si dice \"sabes nadar?\"", opts:["Sai nuotare?","Puoi nuotare?","Devi nuotare?"], correct:0},
+      {q:"Come si dice \"se puede fumar aquí?\"", opts:["Si può fumare qui?","Si deve fumare qui?","Si sa fumare qui?"], correct:0},
+      {q:"Come si dice \"son las cuatro y media\"?", opts:["Sono le quattro e mezza","È le quattro e mezza","Sono quattro e mezza"], correct:0},
+      {q:"Quale verbo useresti per dire che sai suonare il piano?", opts:["sapere","dovere","potere"], correct:0},
+      {q:"Come si dice \"hay que reservar\"?", opts:["Bisogna prenotare","Si può prenotare","Devo prenotare io"], correct:0},
+      {q:"Come si dice \"puedes ayudarme?\"", opts:["Puoi aiutarmi?","Sai aiutarmi?","Devi aiutarmi?"], correct:0}
+    ]
+  },
+  {
+    id: 7.5,
+    title: "La routine quotidiana",
+    image: `<svg viewBox="0 0 400 200"><circle cx="200" cy="90" r="60" fill="#FFFDF7" stroke="#1B2B3A22" stroke-width="3"/><line x1="200" y1="90" x2="200" y2="50" stroke="#2C5F7C" stroke-width="5"/><line x1="200" y1="90" x2="225" y2="90" stroke="#A85030" stroke-width="4"/><rect x="150" y="160" width="100" height="20" rx="8" fill="#D9A441"/></svg>`,
+    theory: {
+      intro: "Per descrivere la routine giornaliera usiamo i verbi riflessivi (alzarsi, lavarsi, vestirsi) e gli avverbi di frequenza.",
+      grammar: [
+        {label:"Alzarsi (presente, riflessivo)", rows:[["io mi alzo","yo me levanto"],["tu ti alzi","tú te levantas"],["lui/lei si alza","él/ella se levanta"],["noi ci alziamo","nosotros nos levantamos"],["voi vi alzate","vosotros os levantáis"],["loro si alzano","ellos se levantan"]], audio:true, audioCol:0},
+        {label:"Altri verbi riflessivi", rows:[["lavarsi","lavarse"],["vestirsi","vestirse"],["farsi la doccia","ducharse"],["addormentarsi","dormirse"]], audio:true, audioCol:0},
+        {label:"Avverbi di frequenza", rows:[["sempre","siempre"],["di solito","normalmente"],["a volte","a veces"],["raramente","raramente"],["mai","nunca"]], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"me levanto a las siete\"?", opts:["Mi alzo alle sette","Ti alzi alle sette","Si alza alle sette"], correct:0},
+      {type:"text", q:"Completa: Lei ______ presto ogni giorno. (alzarsi)", answer:"si alza"},
+      {type:"mcq", q:"Come si dice \"me ducho por la mañana\"?", opts:["Mi faccio la doccia la mattina","Ti fai la doccia la mattina","Si fa la doccia la mattina"], correct:0},
+      {type:"mcq", q:"Quale avverbio significa \"nunca\"?", opts:["mai","sempre","spesso"], correct:0},
+      {type:"text", q:"Completa: Noi ______ alle otto. (vestirsi)", answer:"ci vestiamo"},
+      {type:"mcq", q:"Come si dice \"a veces\"?", opts:["a volte","sempre","mai"], correct:0},
+      {type:"mcq", q:"Il verbo alzarsi è...", opts:["riflessivo","impersonale","irregolare al plurale"], correct:0},
+      {type:"mcq", q:"Come si dice \"nos dormimos tarde\"?", opts:["Ci addormentiamo tardi","Vi addormentate tardi","Si addormentano tardi"], correct:0}
+    ],
+    oral: [
+      {ca:"Mi alzo alle sette.", es:"Me levanto a las siete."},
+      {ca:"Mi faccio la doccia velocemente.", es:"Me ducho rápidamente."},
+      {ca:"Di solito faccio colazione a casa.", es:"Normalmente desayuno en casa."},
+      {ca:"Mi vesto e vado al lavoro.", es:"Me visto y voy al trabajo."},
+      {ca:"A volte torno tardi.", es:"A veces vuelvo tarde."},
+      {ca:"Mi addormento presto.", es:"Me duermo pronto."}
+    ],
+    quiz: [
+      {q:"Come si dice \"nos levantamos temprano\"?", opts:["Ci alziamo presto","Vi alzate presto","Si alzano presto"], correct:0},
+      {q:"Quale avverbio significa \"siempre\"?", opts:["sempre","mai","a volte"], correct:0},
+      {q:"Come si dice \"te vistes rápido\"?", opts:["Ti vesti velocemente","Mi vesto velocemente","Si veste velocemente"], correct:0},
+      {q:"Come si dice \"se duchan por la noche\"?", opts:["Si fanno la doccia la sera","Ci facciamo la doccia la sera","Ti fai la doccia la sera"], correct:0},
+      {q:"Quale avverbio significa \"raramente\"?", opts:["raramente","sempre","spesso"], correct:0},
+      {q:"Il pronome riflessivo per \"noi\" è...", opts:["ci","si","vi"], correct:0},
+      {q:"Come si dice \"me duermo tarde\"?", opts:["Mi addormento tardi","Ti addormenti tardi","Si addormenta tardi"], correct:0},
+      {q:"Come si dice \"normalmente\" in relazione alla frequenza?", opts:["di solito","mai","a volte"], correct:0},
+      {q:"Il pronome riflessivo per \"loro\" è...", opts:["si","ci","vi"], correct:0},
+      {q:"Come si dice \"os levantáis pronto\"?", opts:["Vi alzate presto","Ci alziamo presto","Si alzano presto"], correct:0}
+    ]
+  },
+  {
+    id: 7.7,
+    title: "Stati fisici e d'animo",
+    image: `<svg viewBox="0 0 400 200"><circle cx="200" cy="100" r="70" fill="#E8C39E"/><circle cx="175" cy="85" r="8" fill="#1B2B3A"/><circle cx="225" cy="85" r="8" fill="#1B2B3A"/><path d="M175 125 Q 200 110 225 125" stroke="#A85030" stroke-width="5" fill="none"/></svg>`,
+    theory: {
+      intro: "Per descrivere come ti senti fisicamente o emotivamente usiamo stare/essere + aggettivo, e avere mal di + parte del corpo.",
+      grammar: [
+        {label:"Stare (presente)", rows:[["io sto","yo estoy"],["tu stai","tú estás"],["lui/lei sta","él/ella está"],["noi stiamo","nosotros estamos"],["voi state","vosotros estáis"],["loro stanno","ellos están"]], audio:true, audioCol:0},
+        {label:"Avere mal di...", rows:[["Ho mal di testa.","Tengo dolor de cabeza."],["Ho mal di pancia.","Tengo dolor de barriga."],["Ho mal di schiena.","Tengo dolor de espalda."]], audio:true, audioCol:0},
+        {label:"Stati d'animo", rows:[["contento/a","contento/a"],["triste","triste"],["stanco/a","cansado/a"],["nervoso/a","nervioso/a"],["felice","feliz"]], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"estoy cansado\"?", opts:["Sono stanco","Ho stanco","Sto stanco"], correct:0},
+      {type:"mcq", q:"Come si dice \"tengo dolor de cabeza\"?", opts:["Ho mal di testa","Sto male testa","Sono mal di testa"], correct:0},
+      {type:"text", q:"Completa: Come ______ oggi? (stare, tu)", answer:"stai"},
+      {type:"mcq", q:"Quale aggettivo significa \"triste\"?", opts:["triste","contento","stanco"], correct:0},
+      {type:"mcq", q:"Come si dice \"estamos nerviosos\"?", opts:["Siamo nervosi","Stiamo nervosi","Abbiamo nervosi"], correct:0},
+      {type:"text", q:"Completa: Lei ______ molto felice oggi. (essere)", answer:"è"},
+      {type:"mcq", q:"Come si dice \"tengo dolor de espalda\"?", opts:["Ho mal di schiena","Ho mal di testa","Sto mal di schiena"], correct:0},
+      {type:"mcq", q:"Come rispondi a \"Come stai?\" se stai bene?", opts:["Sto bene","Ho bene","Sono bene"], correct:0}
+    ],
+    oral: [
+      {ca:"Come stai?", es:"¿Cómo estás?"},
+      {ca:"Sto bene, grazie.", es:"Estoy bien, gracias."},
+      {ca:"Ho mal di testa.", es:"Tengo dolor de cabeza."},
+      {ca:"Sono molto stanco.", es:"Estoy muy cansado."},
+      {ca:"Oggi sono felice.", es:"Hoy estoy feliz."},
+      {ca:"Lei è un po' nervosa.", es:"Ella está un poco nerviosa."}
+    ],
+    quiz: [
+      {q:"Come si dice \"estoy contento\"?", opts:["Sono contento","Ho contento","Sto contento"], correct:0},
+      {q:"Come si dice \"tengo dolor de barriga\"?", opts:["Ho mal di pancia","Sto mal di pancia","Ho mal pancia"], correct:0},
+      {q:"Quale aggettivo significa \"cansado\"?", opts:["stanco","triste","nervoso"], correct:0},
+      {q:"Come si dice \"cómo estás?\"", opts:["Come stai?","Come sei?","Come hai?"], correct:0},
+      {q:"Come si dice \"están felices\"?", opts:["Sono felici","Stanno felici","Hanno felici"], correct:0},
+      {q:"Il verbo stare si usa per...", opts:["stati temporanei","caratteristiche permanenti","nomi propri"], correct:0},
+      {q:"Come si dice \"tengo dolor de cabeza\"?", opts:["Ho mal di testa","Sono mal di testa","Sto mal di testa"], correct:0},
+      {q:"Quale aggettivo significa \"triste\"?", opts:["triste","felice","contento"], correct:0},
+      {q:"Come si dice \"estamos cansados\"?", opts:["Siamo stanchi","Stiamo stanchi","Abbiamo stanchi"], correct:0},
+      {q:"\"Ho mal di schiena\" corrisponde a...", opts:["Tengo dolor de espalda","Tengo dolor de cabeza","Estoy cansado"], correct:0}
+    ]
+  },
+  {
+    id: 8,
+    title: "Il cibo",
+    image: `<svg viewBox="0 0 400 200"><ellipse cx="200" cy="130" rx="120" ry="20" fill="#1B2B3A15"/><circle cx="200" cy="100" r="70" fill="#FFFDF7" stroke="#1B2B3A22" stroke-width="3"/><circle cx="180" cy="90" r="15" fill="#A85030"/><circle cx="220" cy="95" r="12" fill="#5B7F4B"/><circle cx="200" cy="115" r="10" fill="#D9A441"/></svg>`,
+    theory: {
+      intro: "Per parlare del cibo usiamo volere, mi piace, l'articolo partitivo (del/dello/della) e le misure.",
+      grammar: [
+        {label:"Volere (presente)", rows:[["io voglio","yo quiero"],["tu vuoi","tú quieres"],["lui/lei vuole","él/ella quiere"],["noi vogliamo","nosotros queremos"],["voi volete","vosotros queréis"],["loro vogliono","ellos quieren"]], audio:true, audioCol:0},
+        {label:"Articolo partitivo (un po' di)", rows:[["del pane","algo de pan"],["della pasta","algo de pasta"],["dell'acqua","algo de agua"],["degli spaghetti","algunos espaguetis"]], note:"L'articolo partitivo si forma con di + articolo determinativo e indica una quantità indefinita."},
+        {label:"Cibi comuni", rows:[
+          ["il pane","el pan"],["la pasta","la pasta"],["la carne","la carne"],["il pesce","el pescado"],
+          ["la frutta","la fruta"],["la verdura","la verdura"],["l'acqua","el agua"],["il formaggio","el queso"]
+        ], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"quiero agua\"?", opts:["Voglio acqua","Vuoi acqua","Vuole acqua"], correct:0},
+      {type:"mcq", q:"Come si dice \"un poco de pan\"?", opts:["del pane","dello pane","della pane"], correct:0},
+      {type:"text", q:"Completa: Lei ______ mangiare la pasta. (volere)", answer:"vuole"},
+      {type:"mcq", q:"Quale articolo partitivo va con \"acqua\"?", opts:["dell'","del","della"], correct:0},
+      {type:"mcq", q:"Come si dice \"la verdura\"?", opts:["la verdura","la carne","il formaggio"], correct:0},
+      {type:"text", q:"Completa: Noi ______ un po' di pesce. (volere)", answer:"vogliamo"},
+      {type:"mcq", q:"Come si dice \"el queso\"?", opts:["il formaggio","il pane","la carne"], correct:0},
+      {type:"mcq", q:"Quale articolo partitivo va con \"spaghetti\" (plurale)?", opts:["degli","del","della"], correct:0}
+    ],
+    oral: [
+      {ca:"Voglio un po' di pane.", es:"Quiero un poco de pan."},
+      {ca:"Mi piace molto la pasta.", es:"Me gusta mucho la pasta."},
+      {ca:"Vuoi dell'acqua?", es:"¿Quieres agua?"},
+      {ca:"Mangio frutta ogni giorno.", es:"Como fruta todos los días."},
+      {ca:"Preferisco il pesce alla carne.", es:"Prefiero el pescado a la carne."},
+      {ca:"C'è del formaggio in frigorifero.", es:"Hay queso en la nevera."}
+    ],
+    quiz: [
+      {q:"Come si dice \"quiero pasta\"?", opts:["Voglio la pasta","Vuoi la pasta","Vuole la pasta"], correct:0},
+      {q:"L'articolo partitivo si forma con...", opts:["di + articolo","solo di","solo l'articolo"], correct:0},
+      {q:"Come si dice \"el pescado\"?", opts:["il pesce","la carne","il pane"], correct:0},
+      {q:"Come si dice \"queréis fruta?\"", opts:["Volete frutta?","Vogliono frutta?","Vuoi frutta?"], correct:0},
+      {q:"Quale articolo partitivo va con \"pane\" (maschile)?", opts:["del","della","degli"], correct:0},
+      {q:"Come si dice \"la carne\"?", opts:["la carne","il pesce","la verdura"], correct:0},
+      {q:"Come si dice \"quieren agua\"?", opts:["Vogliono acqua","Volete acqua","Vuole acqua"], correct:0},
+      {q:"Quale parola significa \"el agua\"?", opts:["l'acqua","il pane","la pasta"], correct:0},
+      {q:"Come si dice \"un poco de queso\"?", opts:["un po' di formaggio","del formaggio poco","poco formaggio del"], correct:0},
+      {q:"Come si dice \"quiere pescado\" (lui)?", opts:["Vuole pesce","Vuoi pesce","Voglio pesce"], correct:0}
+    ]
+  },
+  {
+    id: 8.5,
+    title: "Gli acquisti",
+    image: `<svg viewBox="0 0 400 200"><rect x="130" y="80" width="140" height="100" rx="10" fill="#A85030"/><path d="M150 80 Q 150 40 200 40 Q 250 40 250 80" stroke="#1B2B3A" stroke-width="8" fill="none"/><circle cx="200" cy="150" r="8" fill="#D9A441"/></svg>`,
+    theory: {
+      intro: "Per fare acquisti usiamo espressioni come quanto costa, vorrei, e i nomi dei negozi.",
+      grammar: [
+        {label:"Espressioni per comprare", rows:[
+          ["Quanto costa?","¿Cuánto cuesta?"],["Quanto costano?","¿Cuánto cuestan?"],
+          ["Vorrei un chilo di mele.","Querría un kilo de manzanas."],["Posso pagare con carta?","¿Puedo pagar con tarjeta?"]
+        ], audio:true, audioCol:0},
+        {label:"Negozi", rows:[
+          ["il supermercato","el supermercado"],["il negozio","la tienda"],["la farmacia","la farmacia"],
+          ["il mercato","el mercado"],["la panetteria","la panadería"]
+        ], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"¿cuánto cuesta?\"", opts:["Quanto costa?","Quanto costano?","Quanto vale?"], correct:0},
+      {type:"mcq", q:"Come si dice \"querría un kilo de manzanas\"?", opts:["Vorrei un chilo di mele","Voglio un chilo di mele","Vorrei un chilo mele"], correct:0},
+      {type:"text", q:"Dove compri il pane fresco? Alla ______.", answer:"panetteria"},
+      {type:"mcq", q:"Come si dice \"¿puedo pagar con tarjeta?\"", opts:["Posso pagare con carta?","Voglio pagare con carta?","Devo pagare con carta?"], correct:0},
+      {type:"mcq", q:"Dove compri le medicine?", opts:["in farmacia","al mercato","in panetteria"], correct:0},
+      {type:"text", q:"Completa: ______ costano queste scarpe? (quanto)", answer:"quanto"},
+      {type:"mcq", q:"Come si dice \"el mercado\"?", opts:["il mercato","il negozio","il supermercato"], correct:0},
+      {type:"mcq", q:"Dove fai la spesa settimanale di solito?", opts:["al supermercato","in farmacia","in panetteria"], correct:0}
+    ],
+    oral: [
+      {ca:"Quanto costa questa camicia?", es:"¿Cuánto cuesta esta camisa?"},
+      {ca:"Vorrei un chilo di mele.", es:"Querría un kilo de manzanas."},
+      {ca:"Posso pagare con carta?", es:"¿Puedo pagar con tarjeta?"},
+      {ca:"Vado al supermercato.", es:"Voy al supermercado."},
+      {ca:"Il mercato è aperto il sabato.", es:"El mercado está abierto el sábado."},
+      {ca:"È troppo caro.", es:"Es demasiado caro."}
+    ],
+    quiz: [
+      {q:"Come si dice \"¿cuánto cuestan?\"", opts:["Quanto costano?","Quanto costa?","Quanto vale?"], correct:0},
+      {q:"Come si dice \"querría café\"?", opts:["Vorrei un caffè","Voglio un caffè","Devo un caffè"], correct:0},
+      {q:"Dove trovi frutta e verdura fresche all'aperto?", opts:["al mercato","in farmacia","in banca"], correct:0},
+      {q:"Come si dice \"la tienda\"?", opts:["il negozio","il mercato","la farmacia"], correct:0},
+      {q:"Come si dice \"¿puedo pagar en efectivo?\"", opts:["Posso pagare in contanti?","Devo pagare in contanti?","Voglio pagare in contanti?"], correct:0},
+      {q:"Dove compri le medicine?", opts:["in farmacia","in panetteria","al mercato"], correct:0},
+      {q:"Come si dice \"es demasiado caro\"?", opts:["È troppo caro","È molto caro","È poco caro"], correct:0},
+      {q:"Come si dice \"la panadería\"?", opts:["la panetteria","il supermercato","il negozio"], correct:0},
+      {q:"\"Vorrei\" si usa per...", opts:["chiedere qualcosa con cortesia","dare un ordine","rifiutare qualcosa"], correct:0},
+      {q:"Come si dice \"el supermercado\"?", opts:["il supermercato","il mercato","il negozio"], correct:0}
+    ]
+  },
+  {
+    id: 8.7,
+    title: "Trasporti e viaggi",
+    image: `<svg viewBox="0 0 400 200"><rect x="60" y="90" width="280" height="60" rx="20" fill="#2C5F7C"/><rect x="90" y="60" width="90" height="50" rx="10" fill="#2C5F7C"/><circle cx="120" cy="160" r="20" fill="#1B2B3A"/><circle cx="280" cy="160" r="20" fill="#1B2B3A"/><rect x="100" y="75" width="60" height="25" fill="#FFFDF7"/></svg>`,
+    theory: {
+      intro: "Per parlare di trasporti e viaggi usiamo andare in/con + mezzo di trasporto e il vocabolario dei biglietti.",
+      grammar: [
+        {label:"Mezzi di trasporto", rows:[
+          ["il treno","el tren"],["l'autobus","el autobús"],["la macchina","el coche"],
+          ["l'aereo","el avión"],["la metro","el metro"],["a piedi","a pie"]
+        ], audio:true, audioCol:0, note:"Si usa \"in\" con i mezzi di trasporto: vado in treno, in autobus, in macchina. Si dice \"a piedi\" senza preposizione \"in\"."},
+        {label:"Vocabolario dei viaggi", rows:[
+          ["il biglietto","el billete"],["la partenza","la salida"],["l'arrivo","la llegada"],
+          ["andata e ritorno","ida y vuelta"],["l'orario","el horario"]
+        ], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Come si dice \"voy en tren\"?", opts:["Vado in treno","Vado con treno","Vado a treno"], correct:0},
+      {type:"mcq", q:"Come si dice \"un billete de ida y vuelta\"?", opts:["un biglietto andata e ritorno","un biglietto arrivo","un biglietto partenza"], correct:0},
+      {type:"text", q:"Come vai a scuola se non usi trasporti? ______", answer:"a piedi"},
+      {type:"mcq", q:"Come si dice \"el avión\"?", opts:["l'aereo","il treno","la metro"], correct:0},
+      {type:"mcq", q:"Come si dice \"la salida\"?", opts:["la partenza","l'arrivo","l'orario"], correct:0},
+      {type:"text", q:"Completa: Il treno ______ alle otto. (partire)", answer:"parte"},
+      {type:"mcq", q:"Come si dice \"el metro\"?", opts:["la metro","l'autobus","la macchina"], correct:0},
+      {type:"mcq", q:"Come si dice \"la llegada\"?", opts:["l'arrivo","la partenza","il biglietto"], correct:0}
+    ],
+    oral: [
+      {ca:"Vado in treno al lavoro.", es:"Voy en tren al trabajo."},
+      {ca:"A che ora parte l'autobus?", es:"¿A qué hora sale el autobús?"},
+      {ca:"Ho comprato un biglietto andata e ritorno.", es:"He comprado un billete de ida y vuelta."},
+      {ca:"Preferisco viaggiare in aereo.", es:"Prefiero viajar en avión."},
+      {ca:"L'arrivo è previsto alle sei.", es:"La llegada está prevista a las seis."},
+      {ca:"Vado a piedi, non è lontano.", es:"Voy a pie, no está lejos."}
+    ],
+    quiz: [
+      {q:"Come si dice \"voy en autobús\"?", opts:["Vado in autobus","Vado con autobus","Vado a autobus"], correct:0},
+      {q:"Come si dice \"el billete\"?", opts:["il biglietto","l'orario","la partenza"], correct:0},
+      {q:"Quale preposizione si usa con i mezzi di trasporto?", opts:["in","a","con"], correct:0},
+      {q:"Come si dice \"a pie\"?", opts:["a piedi","in piede","con piedi"], correct:0},
+      {q:"Come si dice \"la llegada\"?", opts:["l'arrivo","la partenza","l'orario"], correct:0},
+      {q:"Come si dice \"el avión\"?", opts:["l'aereo","il treno","l'autobus"], correct:0},
+      {q:"Come si dice \"ida y vuelta\"?", opts:["andata e ritorno","solo andata","solo ritorno"], correct:0},
+      {q:"Come si dice \"el horario\"?", opts:["l'orario","il biglietto","la partenza"], correct:0},
+      {q:"Come si dice \"viajo en coche\"?", opts:["Viaggio in macchina","Viaggio con macchina","Viaggio a macchina"], correct:0},
+      {q:"Come si dice \"la salida\"?", opts:["la partenza","l'arrivo","l'orario"], correct:0}
+    ]
+  },
+  {
+    id: 9,
+    title: "Il passato: cosa hai fatto oggi",
+    image: `<svg viewBox="0 0 400 200"><circle cx="200" cy="100" r="70" fill="#FFFDF7" stroke="#1B2B3A22" stroke-width="3"/><path d="M160 100 L 190 100 L 190 70" stroke="#A85030" stroke-width="6" fill="none" stroke-linecap="round"/><text x="200" y="185" font-size="20" font-family="Georgia,serif" fill="#2C5F7C" text-anchor="middle">passato</text></svg>`,
+    theory: {
+      intro: "Per parlare del passato prossimo usiamo l'ausiliare avere o essere + participio passato del verbo.",
+      grammar: [
+        {label:"Participi regolari", rows:[
+          ["parlare → parlato","hablar → hablado"],["mangiare → mangiato","comer → comido"],
+          ["dormire → dormito","dormir → dormido"],["finire → finito","terminar → terminado"]
+        ], note:"I verbi in -are fanno il participio in -ato, quelli in -ere in -uto, quelli in -ire in -ito."},
+        {label:"Participi irregolari comuni", rows:[
+          ["fare → fatto","hacer → hecho"],["essere → stato","ser/estar → sido/estado"],
+          ["avere → avuto","tener → tenido"],["vedere → visto","ver → visto"],["dire → detto","decir → dicho"]
+        ], audio:true, audioCol:0},
+        {label:"Ho mangiato... (esempio con avere)", rows:[
+          ["io ho mangiato","yo he comido"],["tu hai mangiato","tú has comido"],["lui/lei ha mangiato","él/ella ha comido"],
+          ["noi abbiamo mangiato","nosotros hemos comido"],["voi avete mangiato","vosotros habéis comido"],["loro hanno mangiato","ellos han comido"]
+        ], audio:true, audioCol:0}
+      ]
+    },
+    written: [
+      {type:"mcq", q:"Qual è il participio passato di \"parlare\"?", opts:["parlato","parlito","parluto"], correct:0},
+      {type:"mcq", q:"Come si dice \"he comido\"?", opts:["ho mangiato","ho mangiare","sono mangiato"], correct:0},
+      {type:"text", q:"Completa: Ieri ______ (io, fare) i compiti.", answer:"ho fatto"},
+      {type:"mcq", q:"Qual è il participio passato di \"vedere\"?", opts:["visto","veduto","vedito"], correct:0},
+      {type:"mcq", q:"Come si dice \"has dormido bien?\"", opts:["Hai dormito bene?","Hai dormire bene?","Sei dormito bene?"], correct:0},
+      {type:"text", q:"Completa: Loro ______ (finire) il progetto ieri.", answer:"hanno finito"},
+      {type:"mcq", q:"Qual è il participio passato di \"dire\"?", opts:["detto","dicato","dito"], correct:0},
+      {type:"mcq", q:"Come si dice \"hemos hablado mucho\"?", opts:["Abbiamo parlato molto","Abbiamo parlare molto","Siamo parlato molto"], correct:0}
+    ],
+    oral: [
+      {ca:"Cosa hai fatto oggi?", es:"¿Qué has hecho hoy?"},
+      {ca:"Ho lavorato tutto il giorno.", es:"He trabajado todo el día."},
+      {ca:"Abbiamo mangiato al ristorante.", es:"Hemos comido en el restaurante."},
+      {ca:"Hai visto quel film?", es:"¿Has visto esa película?"},
+      {ca:"Non ho dormito bene.", es:"No he dormido bien."},
+      {ca:"Loro hanno detto la verità.", es:"Ellos han dicho la verdad."}
+    ],
+    quiz: [
+      {q:"Qual è il participio passato di \"mangiare\"?", opts:["mangiato","mangiuto","mangito"], correct:0},
+      {q:"Come si dice \"he hecho los deberes\"?", opts:["Ho fatto i compiti","Ho fare i compiti","Sono fatto i compiti"], correct:0},
+      {q:"I verbi in -ire fanno il participio in...", opts:["-ito","-ato","-uto"], correct:0},
+      {q:"Qual è il participio passato di \"essere\"?", opts:["stato","essuto","estato"], correct:0},
+      {q:"Come si dice \"han dicho la verdad\"?", opts:["Hanno detto la verità","Hanno dire la verità","Sono detto la verità"], correct:0},
+      {q:"Come si dice \"has visto la película?\"", opts:["Hai visto il film?","Hai vedere il film?","Sei visto il film?"], correct:0},
+      {q:"Qual è il participio passato di \"avere\"?", opts:["avuto","avato","avuito"], correct:0},
+      {q:"I verbi in -are fanno il participio in...", opts:["-ato","-ito","-uto"], correct:0},
+      {q:"Come si dice \"hemos dormido poco\"?", opts:["Abbiamo dormito poco","Abbiamo dormire poco","Siamo dormito poco"], correct:0},
+      {q:"Qual è il participio passato di \"fare\"?", opts:["fatto","faciuto","fato"], correct:0}
+    ]
+  }
+];
+const GLOSSARI = [
+  {
+    label: "Articoli determinativi",
+    grammar: [
+      {label:"Maschile", rows:[["il","el (davanti a consonante)"],["lo","el (davanti a s+cons., z, gn, ps, x, y)"],["l'","el (davanti a vocale)"],["i","los"],["gli","los (davanti a vocale o gruppi speciali)"]], note:"L'articolo dipende dalla lettera iniziale della parola che segue, non solo dal genere."},
+      {label:"Femminile", rows:[["la","la"],["l'","la (davanti a vocale)"],["le","las"]]}
+    ]
+  },
+  {
+    label: "Articoli indeterminativi",
+    grammar: [
+      {label:"Maschile e femminile", rows:[["un","un (davanti a consonante o vocale)"],["uno","un (davanti a s+cons., z, gn, ps, x, y)"],["una","una"],["un'","una (davanti a vocale)"]], note:"Al plurale l'articolo indeterminativo non esiste: si usa il partitivo (dei, degli, delle) o niente."}
+    ]
+  },
+  {
+    label: "Pronomi personali soggetto",
+    grammar: [
+      {label:"Singolare e plurale", rows:[["io","yo"],["tu","tú"],["lui / lei","él / ella"],["noi","nosotros"],["voi","vosotros"],["loro","ellos/ellas"]], note:"In italiano il pronome soggetto si omette spesso, perché la coniugazione del verbo già indica la persona."}
+    ]
+  },
+  {
+    label: "Aggettivi possessivi",
+    grammar: [
+      {label:"Con l'articolo (di solito)", rows:[["il mio / la mia","mi / mío-a"],["il tuo / la tua","tu / tuyo-a"],["il suo / la sua","su / suyo-a"],["il nostro / la nostra","nuestro/a"],["il vostro / la vostra","vuestro/a"],["il loro / la loro","su / suyo-a (de ellos)"]], note:"Eccezione: con i nomi singolari di famiglia stretta senza aggettivi non si usa l'articolo (mio padre, non il mio padre)."}
+    ]
+  },
+  {
+    label: "Preposizioni articolate",
+    grammar: [
+      {label:"Con \"il\"", rows:[["al","a + il"],["del","di + il"],["dal","da + il"],["nel","in + il"],["sul","su + il"]]},
+      {label:"Con \"la\"", rows:[["alla","a + la"],["della","di + la"],["dalla","da + la"],["nella","in + la"],["sulla","su + la"]], note:"Le preposizioni a, di, da, in, su si combinano con l'articolo che segue formando una sola parola."}
+    ]
+  }
+];
+
+const VERBS_REFERENCE = [
+  {
+    infinitive: "essere",
+    meaning: "ser / estar",
+    present: [["io","sono"],["tu","sei"],["lui/lei","è"],["noi","siamo"],["voi","siete"],["loro","sono"]],
+    perfect: [["io","sono stato/a"],["tu","sei stato/a"],["lui/lei","è stato/a"],["noi","siamo stati/e"],["voi","siete stati/e"],["loro","sono stati/e"]],
+    future: [["io","sarò"],["tu","sarai"],["lui/lei","sarà"],["noi","saremo"],["voi","sarete"],["loro","saranno"]]
+  },
+  {
+    infinitive: "avere",
+    meaning: "tener / haber",
+    present: [["io","ho"],["tu","hai"],["lui/lei","ha"],["noi","abbiamo"],["voi","avete"],["loro","hanno"]],
+    perfect: null,
+    future: [["io","avrò"],["tu","avrai"],["lui/lei","avrà"],["noi","avremo"],["voi","avrete"],["loro","avranno"]]
+  },
+  {
+    infinitive: "andare",
+    meaning: "ir",
+    present: [["io","vado"],["tu","vai"],["lui/lei","va"],["noi","andiamo"],["voi","andate"],["loro","vanno"]],
+    perfect: [["io","sono andato/a"],["tu","sei andato/a"],["lui/lei","è andato/a"],["noi","siamo andati/e"],["voi","siete andati/e"],["loro","sono andati/e"]],
+    future: [["io","andrò"],["tu","andrai"],["lui/lei","andrà"],["noi","andremo"],["voi","andrete"],["loro","andranno"]]
+  },
+  {
+    infinitive: "fare",
+    meaning: "hacer",
+    present: [["io","faccio"],["tu","fai"],["lui/lei","fa"],["noi","facciamo"],["voi","fate"],["loro","fanno"]],
+    perfect: [["io","ho fatto"],["tu","hai fatto"],["lui/lei","ha fatto"],["noi","abbiamo fatto"],["voi","avete fatto"],["loro","hanno fatto"]],
+    future: [["io","farò"],["tu","farai"],["lui/lei","farà"],["noi","faremo"],["voi","farete"],["loro","faranno"]]
+  },
+  {
+    infinitive: "volere",
+    meaning: "querer",
+    present: [["io","voglio"],["tu","vuoi"],["lui/lei","vuole"],["noi","vogliamo"],["voi","volete"],["loro","vogliono"]],
+    perfect: [["io","ho voluto"],["tu","hai voluto"],["lui/lei","ha voluto"],["noi","abbiamo voluto"],["voi","avete voluto"],["loro","hanno voluto"]],
+    future: [["io","vorrò"],["tu","vorrai"],["lui/lei","vorrà"],["noi","vorremo"],["voi","vorrete"],["loro","vorranno"]]
+  },
+  {
+    infinitive: "potere",
+    meaning: "poder",
+    present: [["io","posso"],["tu","puoi"],["lui/lei","può"],["noi","possiamo"],["voi","potete"],["loro","possono"]],
+    perfect: [["io","ho potuto"],["tu","hai potuto"],["lui/lei","ha potuto"],["noi","abbiamo potuto"],["voi","avete potuto"],["loro","hanno potuto"]],
+    future: [["io","potrò"],["tu","potrai"],["lui/lei","potrà"],["noi","potremo"],["voi","potrete"],["loro","potranno"]]
+  },
+  {
+    infinitive: "sapere",
+    meaning: "saber",
+    present: [["io","so"],["tu","sai"],["lui/lei","sa"],["noi","sappiamo"],["voi","sapete"],["loro","sanno"]],
+    perfect: [["io","ho saputo"],["tu","hai saputo"],["lui/lei","ha saputo"],["noi","abbiamo saputo"],["voi","avete saputo"],["loro","hanno saputo"]],
+    future: [["io","saprò"],["tu","saprai"],["lui/lei","saprà"],["noi","sapremo"],["voi","saprete"],["loro","sapranno"]]
+  },
+  {
+    infinitive: "dovere",
+    meaning: "deber",
+    present: [["io","devo"],["tu","devi"],["lui/lei","deve"],["noi","dobbiamo"],["voi","dovete"],["loro","devono"]],
+    perfect: [["io","ho dovuto"],["tu","hai dovuto"],["lui/lei","ha dovuto"],["noi","abbiamo dovuto"],["voi","avete dovuto"],["loro","hanno dovuto"]],
+    future: [["io","dovrò"],["tu","dovrai"],["lui/lei","dovrà"],["noi","dovremo"],["voi","dovrete"],["loro","dovranno"]]
+  },
+  {
+    infinitive: "parlare",
+    meaning: "hablar",
+    present: [["io","parlo"],["tu","parli"],["lui/lei","parla"],["noi","parliamo"],["voi","parlate"],["loro","parlano"]],
+    perfect: [["io","ho parlato"],["tu","hai parlato"],["lui/lei","ha parlato"],["noi","abbiamo parlato"],["voi","avete parlato"],["loro","hanno parlato"]],
+    future: [["io","parlerò"],["tu","parlerai"],["lui/lei","parlerà"],["noi","parleremo"],["voi","parlerete"],["loro","parleranno"]]
+  },
+  {
+    infinitive: "lavorare",
+    meaning: "trabajar",
+    present: [["io","lavoro"],["tu","lavori"],["lui/lei","lavora"],["noi","lavoriamo"],["voi","lavorate"],["loro","lavorano"]],
+    perfect: [["io","ho lavorato"],["tu","hai lavorato"],["lui/lei","ha lavorato"],["noi","abbiamo lavorato"],["voi","avete lavorato"],["loro","hanno lavorato"]],
+    future: [["io","lavorerò"],["tu","lavorerai"],["lui/lei","lavorerà"],["noi","lavoreremo"],["voi","lavorerete"],["loro","lavoreranno"]]
+  },
+  {
+    infinitive: "vivere",
+    meaning: "vivir",
+    present: [["io","vivo"],["tu","vivi"],["lui/lei","vive"],["noi","viviamo"],["voi","vivete"],["loro","vivono"]],
+    perfect: [["io","ho vissuto"],["tu","hai vissuto"],["lui/lei","ha vissuto"],["noi","abbiamo vissuto"],["voi","avete vissuto"],["loro","hanno vissuto"]],
+    future: [["io","vivrò"],["tu","vivrai"],["lui/lei","vivrà"],["noi","vivremo"],["voi","vivrete"],["loro","vivranno"]]
+  },
+  {
+    infinitive: "dire",
+    meaning: "decir",
+    present: [["io","dico"],["tu","dici"],["lui/lei","dice"],["noi","diciamo"],["voi","dite"],["loro","dicono"]],
+    perfect: [["io","ho detto"],["tu","hai detto"],["lui/lei","ha detto"],["noi","abbiamo detto"],["voi","avete detto"],["loro","hanno detto"]],
+    future: [["io","dirò"],["tu","dirai"],["lui/lei","dirà"],["noi","diremo"],["voi","direte"],["loro","diranno"]]
+  },
+  {
+    infinitive: "vedere",
+    meaning: "ver",
+    present: [["io","vedo"],["tu","vedi"],["lui/lei","vede"],["noi","vediamo"],["voi","vedete"],["loro","vedono"]],
+    perfect: [["io","ho visto"],["tu","hai visto"],["lui/lei","ha visto"],["noi","abbiamo visto"],["voi","avete visto"],["loro","hanno visto"]],
+    future: [["io","vedrò"],["tu","vedrai"],["lui/lei","vedrà"],["noi","vedremo"],["voi","vedrete"],["loro","vedranno"]]
+  },
+  {
+    infinitive: "mangiare",
+    meaning: "comer",
+    present: [["io","mangio"],["tu","mangi"],["lui/lei","mangia"],["noi","mangiamo"],["voi","mangiate"],["loro","mangiano"]],
+    perfect: [["io","ho mangiato"],["tu","hai mangiato"],["lui/lei","ha mangiato"],["noi","abbiamo mangiato"],["voi","avete mangiato"],["loro","hanno mangiato"]],
+    future: [["io","mangerò"],["tu","mangerai"],["lui/lei","mangerà"],["noi","mangeremo"],["voi","mangerete"],["loro","mangeranno"]]
+  },
+  {
+    infinitive: "bere",
+    meaning: "beber",
+    present: [["io","bevo"],["tu","bevi"],["lui/lei","beve"],["noi","beviamo"],["voi","bevete"],["loro","bevono"]],
+    perfect: [["io","ho bevuto"],["tu","hai bevuto"],["lui/lei","ha bevuto"],["noi","abbiamo bevuto"],["voi","avete bevuto"],["loro","hanno bevuto"]],
+    future: [["io","berrò"],["tu","berrai"],["lui/lei","berrà"],["noi","berremo"],["voi","berrete"],["loro","berranno"]]
+  },
+  {
+    infinitive: "portare",
+    meaning: "llevar",
+    present: [["io","porto"],["tu","porti"],["lui/lei","porta"],["noi","portiamo"],["voi","portate"],["loro","portano"]],
+    perfect: [["io","ho portato"],["tu","hai portato"],["lui/lei","ha portato"],["noi","abbiamo portato"],["voi","avete portato"],["loro","hanno portato"]],
+    future: [["io","porterò"],["tu","porterai"],["lui/lei","porterà"],["noi","porteremo"],["voi","porterete"],["loro","porteranno"]]
+  },
+  {
+    infinitive: "alzarsi",
+    meaning: "levantarse",
+    present: [["io","mi alzo"],["tu","ti alzi"],["lui/lei","si alza"],["noi","ci alziamo"],["voi","vi alzate"],["loro","si alzano"]],
+    perfect: [["io","mi sono alzato/a"],["tu","ti sei alzato/a"],["lui/lei","si è alzato/a"],["noi","ci siamo alzati/e"],["voi","vi siete alzati/e"],["loro","si sono alzati/e"]],
+    future: [["io","mi alzerò"],["tu","ti alzerai"],["lui/lei","si alzerà"],["noi","ci alzeremo"],["voi","vi alzerete"],["loro","si alzeranno"]]
+  },
+  {
+    infinitive: "chiamarsi",
+    meaning: "llamarse",
+    present: [["io","mi chiamo"],["tu","ti chiami"],["lui/lei","si chiama"],["noi","ci chiamiamo"],["voi","vi chiamate"],["loro","si chiamano"]],
+    perfect: null,
+    future: [["io","mi chiamerò"],["tu","ti chiamerai"],["lui/lei","si chiamerà"],["noi","ci chiameremo"],["voi","vi chiamerete"],["loro","si chiameranno"]]
+  }
+];
+
+let currentUnit = 0;
+let completed = new Set();
+let openGlossEl = null;
+
+const SUPABASE_URL = 'https://qigmaegifzmqotaaiyeg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFpZ21hZWdpZnptcW90YWFpeWVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczOTc5MzAsImV4cCI6MjEwMjk3MzkzMH0.6Wsl5D3ATNVhxo3Pj0uAAToSFXc99BjBzMh8yyPRqpg';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let authMode = 'signin';
+let currentUser = null;
+let currentProfile = null;
+let saveTimeout = null;
+
+function toggleAuthMode(){
+  authMode = authMode === 'signin' ? 'signup' : 'signin';
+  document.getElementById('authSubmitBtn').textContent = authMode === 'signin' ? 'Accedi' : "Crea l'account";
+  document.getElementById('authToggleText').textContent = authMode === 'signin' ? 'Non hai ancora un account?' : 'Hai già un account?';
+  document.getElementById('authToggleLink').textContent = authMode === 'signin' ? "Registrati" : 'Accedi';
+  document.getElementById('authMsg').style.display = 'none';
+}
+
+function showAuthMsg(text, type){
+  const el = document.getElementById('authMsg');
+  el.textContent = text;
+  el.className = 'auth-msg ' + (type || 'bad');
+  el.style.display = 'block';
+}
+
+async function handleAuthSubmit(){
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+  if(!password || (authMode !== 'recovery' && !email)){ showAuthMsg('Compila tutti i campi.', 'bad'); return; }
+  const btn = document.getElementById('authSubmitBtn');
+  btn.disabled = true;
+  try{
+    if(authMode === 'recovery'){
+      const { error } = await sb.auth.updateUser({ password });
+      if(error) throw error;
+      showAuthMsg('Password aggiornata correttamente!', 'ok');
+      authMode = 'signin';
+      btn.textContent = 'Accedi';
+    } else if(authMode === 'signin'){
+      const { error } = await sb.auth.signInWithPassword({ email, password });
+      if(error) throw error;
+    } else {
+      const { error } = await sb.auth.signUp({ email, password });
+      if(error) throw error;
+      showAuthMsg('Account creato! Ora puoi accedere.', 'ok');
+      toggleAuthMode();
+    }
+  }catch(e){
+    showAuthMsg(e.message || 'Si è verificato un errore.', 'bad');
+  }finally{
+    btn.disabled = false;
+  }
+}
+
+async function handleForgotPassword(){
+  const email = document.getElementById('authEmail').value.trim();
+  if(!email){ showAuthMsg('Scrivi prima la tua email.', 'bad'); return; }
+  try{
+    const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.href });
+    if(error) throw error;
+    showAuthMsg("Ti abbiamo inviato un'email per reimpostare la password.", 'ok');
+  }catch(e){
+    showAuthMsg(e.message || 'Si è verificato un errore.', 'bad');
+  }
+}
+
+async function handleLogout(){
+  await sb.auth.signOut();
+}
+
+let isAdminUser = false;
+const COURSE = 'italiano';
+
+async function loadProfile(user){
+  currentUser = user;
+  const { data: profileData, error: profileError } = await sb.from('profiles').select('*').eq('id', user.id).single();
+  if(profileError || !profileData){ console.error(profileError); return; }
+  currentProfile = profileData;
+  isAdminUser = !!profileData.is_admin;
+
+  let { data: progressData } = await sb.from('course_progress').select('*').eq('user_id', user.id).eq('course', COURSE).maybeSingle();
+  if(!progressData){
+    const { data: created } = await sb.from('course_progress').insert({ user_id: user.id, course: COURSE, completed_units: [], current_unit: 0 }).select().single();
+    progressData = created;
+  }
+  completed = new Set((progressData && progressData.completed_units) || []);
+  currentUnit = (progressData && typeof progressData.current_unit === 'number' && progressData.current_unit < UNITS.length) ? progressData.current_unit : 0;
+
+  document.getElementById('adminBtn').style.display = isAdminUser ? 'inline-block' : 'none';
+  document.getElementById('userEmailLabel').textContent = user.email;
+}
+
+function saveProgress(){
+  if(!currentUser) return;
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(async () => {
+    try{
+      await sb.from('course_progress').upsert({
+        user_id: currentUser.id,
+        course: COURSE,
+        completed_units: [...completed],
+        current_unit: currentUnit,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'user_id,course' });
+    }catch(e){ console.error(e); }
+  }, 400);
+}
+
+async function resetProgress(){
+  if(!confirm("Sei sicuro di voler cancellare tutti i progressi? Questa azione non si può annullare.")) return;
+  completed.clear();
+  currentUnit = 0;
+  if(currentUser){
+    try{
+      await sb.from('course_progress').upsert({
+        user_id: currentUser.id, course: COURSE, completed_units: [], current_unit: 0, updated_at: new Date().toISOString()
+      }, { onConflict: 'user_id,course' });
+    }catch(e){ console.error(e); }
+  }
+  renderAll();
+}
+
+async function toggleAdmin(){ setView(currentView === 'admin' ? 'unitats' : 'admin'); }
+
+async function handleResetPassword(userId, email){
+  let newPassword = prompt('Nuova password per ' + email + ' (lascia vuoto per generarne una casuale):');
+  if(newPassword === null) return;
+  if(!newPassword){
+    newPassword = Math.random().toString(36).slice(-6) + Math.floor(Math.random()*90+10);
+  }
+  if(newPassword.length < 6){
+    alert('La password deve avere almeno 6 caratteri.');
+    return;
+  }
+  try{
+    const { data: { session } } = await sb.auth.getSession();
+    const res = await fetch(SUPABASE_URL + '/functions/v1/admin-reset-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + session.access_token,
+        'apikey': SUPABASE_ANON_KEY
+      },
+      body: JSON.stringify({ user_id: userId, new_password: newPassword })
+    });
+    const result = await res.json();
+    if(!res.ok){ throw new Error(result.error || 'Errore nel reimpostare la password'); }
+    alert('Password aggiornata per ' + email + ':\n\n' + newPassword + '\n\nCondividila con l\'utente.');
+  }catch(e){
+    alert('Errore: ' + (e.message || 'si è verificato un problema'));
+  }
+}
+
+async function handleCreateUser(){
+  const email = document.getElementById('newUserEmail').value.trim();
+  const password = document.getElementById('newUserPassword').value;
+  const isAdminNew = document.getElementById('newUserIsAdmin').checked;
+  const msg = document.getElementById('createUserMsg');
+  const btn = document.getElementById('createUserBtn');
+
+  if(!email || !password){
+    msg.textContent = 'Compila email e password.';
+    msg.className = 'auth-msg bad';
+    msg.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  msg.style.display = 'none';
+  try{
+    const { data: { session } } = await sb.auth.getSession();
+    const res = await fetch(SUPABASE_URL + '/functions/v1/admin-create-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + session.access_token,
+        'apikey': SUPABASE_ANON_KEY
+      },
+      body: JSON.stringify({ email, password, is_admin: isAdminNew })
+    });
+    const result = await res.json();
+    if(!res.ok){ throw new Error(result.error || 'Errore nella creazione dell\'utente'); }
+
+    msg.textContent = 'Utente creato correttamente: ' + result.user.email;
+    msg.className = 'auth-msg ok';
+    msg.style.display = 'block';
+    document.getElementById('newUserEmail').value = '';
+    document.getElementById('newUserPassword').value = '';
+    document.getElementById('newUserIsAdmin').checked = false;
+    renderAdminView();
+  }catch(e){
+    msg.textContent = e.message || 'Si è verificato un errore.';
+    msg.className = 'auth-msg bad';
+    msg.style.display = 'block';
+  }finally{
+    btn.disabled = false;
+  }
+}
+
+async function renderAdminView(){
+  const container = document.getElementById('adminContent');
+  container.innerHTML = '<section class="card"><p>Caricamento utenti...</p></section>';
+  const { data: profiles, error } = await sb.from('profiles').select('*').order('email');
+  if(error){
+    container.innerHTML = '<section class="card"><p>Errore nel caricamento degli utenti.</p></section>';
+    return;
+  }
+  const { data: progressRows } = await sb.from('course_progress').select('*').eq('course', COURSE);
+  const progressByUser = {};
+  (progressRows || []).forEach(pr => { progressByUser[pr.user_id] = pr; });
+
+  const rows = profiles.map(p => {
+    const prog = progressByUser[p.id] || { completed_units: [], current_unit: 0 };
+    const pct = Math.round(((prog.completed_units || []).length / UNITS.length) * 100);
+    const unitName = UNITS[prog.current_unit] ? UNITS[prog.current_unit].title : '—';
+    return '<tr><td>'+p.email+'</td><td>'+(p.is_admin ? 'Sí' : 'No')+'</td><td>'+pct+'% ('+((prog.completed_units||[]).length)+'/'+UNITS.length+')</td><td>'+unitName+'</td>' +
+      '<td><button class="level-btn" style="font-size:.7rem; padding:.25rem .6rem;" onclick="handleResetPassword(\''+p.id+'\',\''+p.email+'\')">🔑 Reimposta</button></td></tr>';
+  }).join('');
+  container.innerHTML =
+    '<section class="card"><h2><span class="tag">Admin</span> Crea nuovo utente</h2>' +
+    '<div id="createUserMsg" class="auth-msg" style="display:none;"></div>' +
+    '<input type="email" id="newUserEmail" placeholder="Indirizzo email">' +
+    '<input type="password" id="newUserPassword" placeholder="Password (minimo 6 caratteri)">' +
+    '<label style="display:flex; align-items:center; gap:.5rem; margin:.3rem 0 .9rem; font-size:.9rem; color:var(--ink-soft);">' +
+    '<input type="checkbox" id="newUserIsAdmin" style="width:auto; margin:0;"> Anche questo utente è amministratore</label>' +
+    '<button class="action" id="createUserBtn" onclick="handleCreateUser()">Crea utente</button>' +
+    '</section>' +
+    '<section class="card"><h2><span class="tag">Admin</span> Utenti — Italiano ('+profiles.length+')</h2>' +
+    '<table class="admin-table"><tr><th>Email</th><th>Admin</th><th>Progresso</th><th>Unità attuale</th><th>Azioni</th></tr>' + rows + '</table>' +
+    '</section>';
+}
+
+function renderSidebar(){
+  const list = document.getElementById('unitList');
+  list.innerHTML = '';
+  UNITS.forEach((u, i) => {
+    const locked = !isAdminUser && i > 0 && !completed.has(i-1);
+    const div = document.createElement('div');
+    div.className = 'unit-item' + (i===currentUnit ? ' active' : '') + (completed.has(i) ? ' done' : '') + (locked ? ' locked' : '');
+    div.innerHTML = '<span class="unit-dot"></span> ' + (i+1) + '. ' + u.title;
+    if(!locked){ div.onclick = () => { currentUnit = i; saveProgress(); renderAll(); }; }
+    list.appendChild(div);
+  });
+}
+
+function renderProgress(){
+  const pct = Math.round((completed.size / UNITS.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = 'Unità ' + (currentUnit+1) + ' di ' + UNITS.length + ' · A1 · ' + pct + '% completato';
+
+  const banner = document.getElementById('certificateBanner');
+  if(completed.size === UNITS.length){
+    banner.style.display = 'block';
+    banner.innerHTML = '<section class="card" style="text-align:center; border:2px dashed var(--ochre);">' +
+      '<h2 style="justify-content:center;">🎉 Hai completato il livello A1!</h2>' +
+      '<p>Hai superato le ' + UNITS.length + ' unità del corso, dall\'alfabeto al passato. Ottimo lavoro!</p>' +
+      '<p class="note">Enhorabuena, has completado el nivel A1 del curso de italiano.</p>' +
+      '</section>';
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+function escJs(s){ return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+
+function clockSVG(h, m, size){
+  size = size || 60;
+  const cx = size/2, cy = size/2, r = size/2 - 4;
+  const hourAngle = ((h % 12) + m/60) * 30 - 90;
+  const minAngle = m * 6 - 90;
+  const hourLen = r*0.5, minLen = r*0.8;
+  const hx = (cx + hourLen * Math.cos(hourAngle * Math.PI/180)).toFixed(1);
+  const hy = (cy + hourLen * Math.sin(hourAngle * Math.PI/180)).toFixed(1);
+  const mx = (cx + minLen * Math.cos(minAngle * Math.PI/180)).toFixed(1);
+  const my = (cy + minLen * Math.sin(minAngle * Math.PI/180)).toFixed(1);
+  return '<svg viewBox="0 0 '+size+' '+size+'" width="'+size+'" height="'+size+'">' +
+    '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="#FFFDF7" stroke="#1B2B3A" stroke-width="3"/>' +
+    '<line x1="'+cx+'" y1="'+cy+'" x2="'+hx+'" y2="'+hy+'" stroke="#2C5F7C" stroke-width="4" stroke-linecap="round"/>' +
+    '<line x1="'+cx+'" y1="'+cy+'" x2="'+mx+'" y2="'+my+'" stroke="#A85030" stroke-width="3" stroke-linecap="round"/>' +
+    '<circle cx="'+cx+'" cy="'+cy+'" r="2.5" fill="#1B2B3A"/></svg>';
+}
+
+function renderLetters(items){
+  return items.map(l =>
+    '<div class="alpha-row"><span class="alpha-letter">'+l.letter+'</span>' +
+    '<span class="alpha-desc">'+l.desc+'</span>' +
+    '<span class="alpha-example">'+l.example+'</span>' +
+    '<button class="mini-play" onclick="speakLetter(\''+escJs(l.letter)+'\',\''+escJs(l.example)+'\')" aria-label="Ascolta">&#9654;</button></div>'
+  ).join('');
+}
+
+function renderClocks(items){
+  return items.map(c =>
+    '<div class="alpha-row"><span class="clock-icon">'+clockSVG(c.h,c.m,44)+'</span>' +
+    '<span class="alpha-desc" style="flex:1;">'+c.phrase+'</span>' +
+    '<button class="mini-play" onclick="speak(\''+escJs(c.phrase)+'\')" aria-label="Ascolta">&#9654;</button></div>'
+  ).join('');
+}
+
+function getItalianVoice(){
+  if(!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if(!voices || !voices.length) return null;
+  const itVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('it'));
+  if(!itVoices.length) return null;
+  return itVoices.find(v => /google/i.test(v.name))
+      || itVoices.find(v => v.lang.toLowerCase() === 'it-it')
+      || itVoices[0];
+}
+
+function speakLetter(letter, example){
+  if(!('speechSynthesis' in window)){ alert('Il tuo browser non supporta la sintesi vocale.'); return; }
+  window.speechSynthesis.cancel();
+  const voice = getItalianVoice();
+  const u1 = new SpeechSynthesisUtterance(letter);
+  u1.lang = voice ? voice.lang : 'it-IT'; if(voice) u1.voice = voice; u1.rate = 0.72;
+  const u2 = new SpeechSynthesisUtterance(example);
+  u2.lang = voice ? voice.lang : 'it-IT'; if(voice) u2.voice = voice; u2.rate = 0.85;
+  window.speechSynthesis.speak(u1);
+  window.speechSynthesis.speak(u2);
+}
+
+const CONSIGNA_PHRASES = [
+  ["come si dice","cómo se dice"],
+  ["come si dicono","cómo se dicen"],
+  ["come si pronuncia","cómo se pronuncia"],
+  ["come si scrive","cómo se escribe"],
+  ["come ti chiami","cómo te llamas"],
+  ["come stai","cómo estás"],
+  ["come si suona","cómo suena"],
+  ["qual è la forma corretta","cuál es la forma correcta"],
+  ["qual è la risposta corretta","cuál es la respuesta correcta"],
+  ["qual è il femminile di","cuál es el femenino de"],
+  ["qual è il participio di","cuál es el participio de"],
+  ["quale parola manca","qué palabra falta"],
+  ["quale preposizione","qué preposición"],
+  ["quale verbo","qué verbo"],
+  ["quale pronome","qué pronombre"],
+  ["che ore sono","qué hora es"],
+  ["a che ora","a qué hora"],
+  ["quanto costa","cuánto cuesta"],
+  ["quanto vale","cuánto vale"],
+  ["quanti anni hai","cuántos años tienes"],
+  ["per esempio","por ejemplo"],
+  ["ad esempio","por ejemplo"],
+  ["c'è","hay"],
+  ["ci sono","hay"],
+  ["per favore","por favor"]
+];
+
+const CONSIGNA_WORDS = {
+  "come":"cómo","quale":"cuál","quali":"cuáles","che":"qué","chi":"quién","quando":"cuándo",
+  "dove":"dónde","perché":"porque","è":"es","sono":"son","dice":"dice","dicono":"dicen",
+  "manca":"falta","corretta":"correcta","corretto":"correcto","forma":"forma","parola":"palabra",
+  "femminile":"femenino","maschile":"masculino","plurale":"plural","singolare":"singular",
+  "verbo":"verbo","pronome":"pronombre","preposizione":"preposición","scrivi":"escribe",
+  "senza":"sin","lettere":"letras","io":"yo","tu":"tú","lui":"él","lei":"ella",
+  "noi":"nosotros","voi":"vosotros","loro":"ellos","mio":"mi","mia":"mi","miei":"mis","mie":"mis",
+  "tuo":"tu","tua":"tu","tuoi":"tus","tue":"tus","suo":"su","sua":"su","suoi":"sus","sue":"sus",
+  "hai":"tienes","ha":"tiene","ho":"tengo","abbiamo":"tenemos","avete":"tenéis","hanno":"tienen",
+  "sei":"eres","siamo":"somos","siete":"sois","vuoi":"quieres","voglio":"quiero",
+  "vogliamo":"queremos","volete":"queréis","vogliono":"quieren","puoi":"puedes","posso":"puedo",
+  "possiamo":"podemos","potete":"podéis","possono":"pueden","sai":"sabes","so":"sé",
+  "sappiamo":"sabemos","sapete":"sabéis","sanno":"saben","vai":"vas","va":"va","vado":"voy",
+  "andiamo":"vamos","andate":"vais","vanno":"van","dico":"digo","dici":"dices","diciamo":"decimos",
+  "dite":"decís","vale":"vale","costano":"cuestan","costa":"cuesta","oggi":"hoy","domani":"mañana",
+  "ieri":"ayer","sempre":"siempre","mai":"nunca","spesso":"a menudo","anche":"también",
+  "neanche":"tampoco","molto":"mucho","poco":"poco","abbastanza":"bastante","niente":"nada",
+  "e":"y","o":"o","sì":"sí","no":"no","del":"del","della":"de la","dei":"de los","delle":"de las",
+  "la":"la","le":"las","il":"el","i":"los","gli":"los","un":"un","una":"una","uno":"un",
+  "con":"con","per":"para","a":"a","questo":"este","questa":"esta","questi":"estos","queste":"estas",
+  "quello":"aquel","quella":"aquella","questo":"esto","tutto":"todo","tutta":"toda","tutti":"todos",
+  "tutte":"todas","qualcuno":"alguien","persona":"persona","giorno":"día","settimana":"semana",
+  "mese":"mes","anno":"año","numero":"número","telefono":"teléfono","colore":"color",
+  "colori":"colores","vestiti":"ropa","cibo":"comida","tempo":"tiempo","città":"ciudad",
+  "casa":"casa","famiglia":"familia","rispondi":"responde","scegli":"elige","opzione":"opción",
+  "risposta":"respuesta","domanda":"pregunta","domande":"preguntas","prima":"antes","dopo":"después",
+  "necessiti":"necesitas","necessita":"necesita","serve":"hace falta","sapere":"saber",
+  "parlare":"hablar","grammatica":"gramática","tabella":"tabla","esempio":"ejemplo",
+  "esempi":"ejemplos","parole":"palabras","normalmente":"normalmente","generalmente":"generalmente",
+  "lingua":"lengua","vocabolario":"vocabulario","indica":"indica","esprime":"expresa",
+  "concorda":"concuerda","formare":"formar","presente":"presente","indicativo":"indicativo",
+  "passato":"pasado","futuro":"futuro","participio":"participio","ausiliare":"auxiliar",
+  "riflessivo":"reflexivo","verbi":"verbos","aggettivi":"adjetivos","articoli":"artículos",
+  "pronomi":"pronombres","quantità":"cantidad","misura":"medida","ora":"hora","ore":"horas",
+  "minuto":"minuto","mattina":"mañana","pomeriggio":"tarde","sera":"noche","notte":"noche",
+  "nessuno":"ningún","ogni":"cada","molte":"muchas","molti":"muchos","diverso":"diferente",
+  "diversi":"diferentes","uguale":"igual","simile":"parecido","necessario":"necesario",
+  "importante":"importante","utile":"útil","base":"básico","fondamentale":"fundamental",
+  "condivide":"comparte","però":"pero","suoni":"sonidos","suono":"sonido","propri":"propios",
+  "proprio":"propio","tonica":"tónica","atona":"átona","pulsante":"botón","ascoltare":"escuchar",
+  "tocca":"toca","toccare":"tocar","faccio":"hago","fai":"haces","facciamo":"hacemos",
+  "fate":"hacéis","fanno":"hacen","farò":"haré","farai":"harás","farà":"hará",
+  "nome":"nombre","nomi":"nombres","alfabeto":"alfabeto",
+  "di":"de","in":"en","si":"se","l":"el","completa":"completa","non":"no","italiano":"italiano",
+  "usa":"usa","qual":"cuál","articolo":"artículo","usiamo":"usamos","chiedi":"pides",
+  "essere":"ser","se":"si","viene":"viene","significa":"significa","mi":"me","padre":"padre",
+  "piace":"gusta","partitivo":"partitivo","suona":"suena","solito":"habitual","davanti":"delante",
+  "ti":"te","chiedere":"pedir","fare":"hacer","giorni":"días","chiamarsi":"llamarse","età":"edad",
+  "aggettivo":"adjetivo","madre":"madre","stagione":"estación","combinazione":"combinación",
+  "es":"ej.","italiana":"italiana","lettera":"letra","qualcosa":"algo","cosa":"cosa",
+  "permesso":"permiso","usi":"usas","dell":"del","primo":"primero","da":"de","estate":"verano",
+  "genere":"género","accordo":"acuerdo","piacere":"gustar","andare":"ir","solo":"solo",
+  "vocale":"vocal","spagnola":"española","pesce":"pescado","nella":"en la","esiste":"existe",
+  "dire":"decir","frase":"frase","più":"más","piano":"piano","corrisponde":"corresponde",
+  "lunedì":"lunes","nazionalità":"nacionalidad","lingue":"lenguas","concordano":"concuerdan",
+  "quelli":"aquellos","invariabili":"invariables","invariabile":"invariable","al":"al",
+  "singolari":"singulares","stretta":"estrecha","fratello":"hermano","all":"a la","avere":"tener",
+  "otto":"ocho","inverno":"invierno","alle":"a las","portare":"llevar","dovere":"deber",
+  "alzarsi":"levantarse","avverbio":"adverbio","stare":"estar","volere":"querer","compri":"compras",
+  "trasporto":"transporte","lo":"lo","spagnolo":"español","ma":"pero","scrive":"escribe","sc":"sc",
+  "palatale":"palatal","consonanti":"consonantes","doppie":"dobles","indicano":"indican",
+  "mesi":"meses","weekend":"fin de semana","ultimo":"último","quanti":"cuántos","marco":"Marco",
+  "ventotto":"veintiocho","anni":"años","finiscono":"terminan","francese":"francés",
+  "inglese":"inglés","riferisce":"refiere","tra":"entre","possessivi":"posesivos",
+  "sorella":"hermana","figlio":"hijo","altri":"otros","piacciono":"gustan","espressioni":"expresiones",
+  "d":"de","nemmeno":"tampoco","secondo":"segundo","espressione":"expresión","numeri":"números",
+  "decine":"decenas","perdono":"pierden","finale":"final","divano":"sofá","nevicare":"nevar",
+  "preposizioni":"preposiciones","ordinale":"ordinal","degli":"de los","potere":"poder",
+  "capacità":"capacidad","abilità":"habilidad","obbligo":"obligación","presto":"pronto",
+  "descrivere":"describir","vestirsi":"vestirse","frequenza":"frecuencia","alla":"a la",
+  "medicine":"medicinas","trasporti":"transportes","mezzi":"medios","treno":"tren",
+  "are":"ar","ire":"ir","segue":"sigue","alcuni":"algunos","particolari":"particulares",
+  "accento":"acento","sull":"en la","ultima":"última","altre":"otras","portano":"llevan",
+  "accenti":"acentos","scritti":"escritos","sillaba":"sílaba","italiane":"italianas",
+  "gelato":"helado","troviamo":"encontramos","gnocchi":"ñoquis","palla":"pelota",
+  "pronunciano":"pronuncian","cena":"cena","tale":"tal","pizza":"pizza","fa":"hace",
+  "mamma":"mamá","può":"puede","sorda":"sorda","sonora":"sonora","continuare":"continuar",
+  "frasi":"frases","serviranno":"servirán","unità":"unidad","aiuto":"ayuda","capisci":"entiendes",
+  "ripetano":"repitan","significato":"significado","traduci":"traduce","ripetere":"repetir",
+  "conosci":"conoces","traduzione":"traducción","formale":"formal","educata":"educada",
+  "ripetizione":"repetición","userai":"usarás","scrivono":"escriben","minuscola":"minúscula",
+  "prendono":"toman","giugno":"junio","venerdì":"viernes","quarto":"cuarto","mercoledì":"miércoles",
+  "aprile":"abril","composto":"compuesto","meno":"menos","lavorativa":"laboral",
+  "settembre":"septiembre","italia":"Italia","chiude":"cierra","presentarti":"presentarte",
+  "bisogno":"necesidad","alcune":"algunas","ci":"nos","vi":"os","barcellona":"Barcelona",
+  "spagnoli":"españoles","provenienza":"procedencia","tedesco":"alemán","tre":"tres",
+  "parla":"habla","portoghese":"portugués","esemplificate":"ejemplificadas","lezione":"lección",
+  "parentela":"parentesco","tranne":"excepto","figlia":"hija","nonno":"abuelo","nonna":"abuela",
+  "marito":"marido","moglie":"esposa","amico":"amigo","chiama":"llama","lavora":"trabaja",
+  "ospedale":"hospital","gusti":"gustos","libero":"libre","costruzione":"construcción",
+  "quantificatori":"cuantificadores","mostrare":"mostrar","disaccordo":"desacuerdo",
+  "cinema":"cine","libri":"libros","sport":"deporte","calcio":"fútbol","altra":"otra",
+  "quantificatore":"cuantificador","te":"ti","coniuga":"conjuga","mostra":"muestra",
+  "positivo":"positivo","usano":"usan","prezzi":"precios","telefoni":"teléfonos",
+  "esprimiamo":"expresamos","ventuno":"veintiuno","trentuno":"treinta y uno",
+  "diciannove":"diecinueve","venti":"veinte","modo":"modo","informale":"informal",
+  "nominare":"nombrar","oggetti":"objetos","cambiano":"cambian","sedia":"silla","due":"dos",
+  "sedie":"sillas","dormi":"duermes","cucini":"cocinas","conservare":"conservar",
+  "freddo":"frío","nel":"en el","soggiorno":"salón","siedi":"sientas","guardare":"mirar",
+  "tv":"tele","trova":"encuentra","lavi":"lavas","troveresti":"encontrarías","cucina":"cocina",
+  "atmosferico":"atmosférico","impersonale":"impersonal","oppure":"o bien","piovere":"llover",
+  "caldo":"calor","neve":"nieve","fredda":"fría","associata":"asociada","foglie":"hojas",
+  "cadono":"caen","orientarti":"orientarte","luogo":"lugar","ordinali":"ordinales",
+  "gira":"gira","incrocio":"cruce","sinistra":"izquierda","terzo":"tercero","indossare":"llevar puesto",
+  "blu":"azul","verde":"verde","rosa":"rosa","marrone":"marrón","quasi":"casi","rosso":"rojo",
+  "rossa":"roja","rossi":"rojos","rosse":"rojas","gonna":"falda","gialla":"amarilla",
+  "pantaloni":"pantalones","verdi":"verdes","cambia":"cambia","lavoro":"trabajo","orari":"horarios",
+  "sistema":"sistema","quarti":"cuartos","poder":"poder","saber":"saber","conoscenza":"conocimiento",
+  "deber":"deber","nuotare":"nadar","lavorare":"trabajar","useresti":"usarías","suonare":"tocar",
+  "routine":"rutina","giornaliera":"diaria","riflessivi":"reflexivos","lavarsi":"lavarse",
+  "avverbi":"adverbios","relazione":"relación","senti":"sientes","fisicamente":"físicamente",
+  "emotivamente":"emocionalmente","mal":"mal","parte":"parte","corpo":"cuerpo","felice":"feliz",
+  "stai":"estás","bene":"bien","dello":"del","misure":"medidas","determinativo":"determinado",
+  "indefinita":"indefinida","mangiare":"comer","pasta":"pasta","po":"poco","acquisti":"compras",
+  "vorrei":"querría","negozi":"tiendas","pane":"pan","fresco":"fresco","scarpe":"zapatos",
+  "quanto":"cuánto","spesa":"compra","settimanale":"semanal","trovi":"encuentras",
+  "frutta":"fruta","verdura":"verdura","fresche":"frescas","aperto":"abierto","viaggi":"viajes",
+  "mezzo":"medio","biglietti":"billetes","autobus":"autobús","macchina":"coche","scuola":"escuela",
+  "partire":"partir","prossimo":"próximo","ato":"ado","ere":"er","uto":"ido","ito":"ido",
+  "compiti":"deberes","finire":"terminar","progetto":"proyecto","dipende":"depende",
+  "dalla":"de la","iniziale":"inicial","dal":"del","indeterminativo":"indeterminado",
+  "soggetto":"sujeto","omette":"omite","coniugazione":"conjugación","già":"ya","eccezione":"excepción",
+  "su":"sobre","combinano":"combinan","formando":"formando","sola":"sola"
+};
+
+
+function translateConsigna(text){
+  if(!text) return '';
+  const quotes = [];
+  let working = text.replace(/"([^"]*)"/g, function(m, p1){ quotes.push(p1); return '\u0001'+(quotes.length-1)+'\u0001'; });
+
+  CONSIGNA_PHRASES.forEach(function(pair){
+    const re = new RegExp(pair[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
+    working = working.replace(re, pair[1]);
+  });
+
+  working = working.replace(/[A-Za-zÀ-ÿ·]+/g, function(token){
+    const lower = token.toLowerCase();
+    if(CONSIGNA_WORDS.hasOwnProperty(lower)){
+      let rep = CONSIGNA_WORDS[lower];
+      if(token.charAt(0) === token.charAt(0).toUpperCase() && token.charAt(0) !== token.charAt(0).toLowerCase()){
+        rep = rep.charAt(0).toUpperCase() + rep.slice(1);
+      }
+      return rep;
+    }
+    return token;
+  });
+
+  working = working.replace(/'/g, ' ').replace(/\s+/g, ' ').trim();
+  working = working.replace(/\u0001(\d+)\u0001/g, function(m, idx){ return '"'+quotes[parseInt(idx)]+'"'; });
+  working = working.charAt(0).toUpperCase() + working.slice(1);
+  return working;
+}
+
+function toggleConsignaTranslation(el){
+  const next = el.nextElementSibling;
+  if(next && next.classList && next.classList.contains('consigna-es')){
+    next.remove();
+    return;
+  }
+  const div = document.createElement('div');
+  div.className = 'consigna-es';
+  div.textContent = '🇪🇸 ' + translateConsigna(el.textContent.trim());
+  el.insertAdjacentElement('afterend', div);
+}
+
+function renderGrammarBlock(g){
+  const audioCol = g.audioCol !== undefined ? g.audioCol : 1;
+  const rows = g.rows.map(r => {
+    if(g.audio){
+      return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td class="audio-cell"><button class="mini-play" onclick="speak(\''+escJs(r[audioCol])+'\')" aria-label="Ascolta">&#9654;</button></td></tr>';
+    }
+    return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>';
+  }).join('');
+  const note = g.note ? '<p class="note consigna">'+g.note+'</p>' : '';
+  return '<h3 class="gram-label">'+g.label+'</h3><table class="verb-table">'+rows+'</table>'+note;
+}
+
+function renderUnit(){
+  const u = UNITS[currentUnit];
+
+  const lettersHtml = u.theory.letters ? '<h3 class="gram-label">Lletres</h3>'+renderLetters(u.theory.letters) : '';
+  const specialHtml = u.theory.specialSounds ? '<h3 class="gram-label">Sons especials</h3>'+renderLetters(u.theory.specialSounds) : '';
+  const clocksHtml = u.theory.clocks ? '<h3 class="gram-label">Rellotges</h3>'+renderClocks(u.theory.clocks) : '';
+  const accentHtml = u.theory.accentNote ? '<p class="note consigna">'+u.theory.accentNote+'</p>' : '';
+
+  let grammarHtml = u.theory.grammar.map(renderGrammarBlock).join('');
+
+  const dialogueSection = (u.theory.dialogue && u.theory.dialogue.length)
+    ? '<h3 class="gram-label">Diàleg</h3><div class="dialogue">' +
+      u.theory.dialogue.map(([n,l]) => '<p><b>'+n+':</b> '+l+'</p>').join('') + '</div>'
+    : '';
+
+  const glossarySection = (u.theory.glossary && u.theory.glossary.length)
+    ? '<section class="card"><h2><span class="tag">Glossario</span> Vocabolario chiave</h2>' +
+      '<p class="note" style="margin-top:-.3rem;">Aquestes mateixes paraules són clicables al diàleg.</p>' +
+      '<div class="glossary-grid">' + u.theory.glossary.map(g =>
+        '<div class="gloss-row"><span class="ca">'+g.ca+'</span><span class="es">'+g.es+'</span></div>'
+      ).join('') + '</div></section>'
+    : '';
+
+  const writtenHtml = u.written.map((ex,i) => {
+    const clockHtml = ex.clock ? '<span class="ex-clock">'+clockSVG(ex.clock.h, ex.clock.m, 56)+'</span>' : '';
+    if(ex.type === 'mcq'){
+      const opts = ex.opts.map((o,oi)=> '<label class="opt"><input type="radio" name="w'+i+'" value="'+oi+'"> '+o+'</label>').join('');
+      const body = '<p class="q consigna">'+(i+1)+'. '+ex.q+'</p>'+opts+'<div class="fb"></div>';
+      const inner = clockHtml ? '<div class="ex-row">'+clockHtml+'<div style="flex:1;">'+body+'</div></div>' : body;
+      return '<div class="exercise" data-type="mcq" data-correct="'+ex.correct+'" data-index="'+i+'">'+inner+'</div><hr class="ex-divider">';
+    }
+    const body = '<p class="q consigna">'+(i+1)+'. '+ex.q+'</p><input type="text" placeholder="scrivi la risposta"><div class="fb"></div>';
+    const inner = clockHtml ? '<div class="ex-row">'+clockHtml+'<div style="flex:1;">'+body+'</div></div>' : body;
+    return '<div class="exercise" data-type="fill" data-answer="'+ex.a+'" data-index="'+i+'">'+inner+'</div><hr class="ex-divider">';
+  }).join('');
+
+  const oralHtml = u.oral.map(p =>
+    '<div class="phrase-row"><div><div class="phrase-cat">'+p.ca+'</div><div class="phrase-es">'+p.es+'</div></div>' +
+    '<button class="play-btn" onclick="speak(\''+p.ca.replace(/'/g,"\\'")+'\')" aria-label="Ascolta">&#9654;</button></div>'
+  ).join('');
+
+  const quizHtml = u.quiz.map((q,qi) => {
+    const clockHtml = q.clock ? '<span class="ex-clock">'+clockSVG(q.clock.h, q.clock.m, 50)+'</span>' : '';
+    const body = '<p class="q consigna">'+(qi+1)+'. '+q.q+'</p>' +
+      q.opts.map((o,oi) => '<label class="opt"><input type="radio" name="qz'+qi+'" value="'+oi+'"> '+o+'</label>').join('');
+    const inner = clockHtml ? '<div class="ex-row">'+clockHtml+'<div style="flex:1;">'+body+'</div></div>' : body;
+    return '<div class="q-block" data-correct="'+q.correct+'">'+inner+'</div>';
+  }).join('');
+
+  document.getElementById('unitContent').innerHTML =
+    '<section class="card"><h2><span class="tag">Teoria</span> Unità '+(currentUnit+1)+' · '+u.title+'</h2>' +
+    (u.image ? '<div class="unit-illustration">'+u.image+'</div>' : '') +
+    '<p class="consigna">'+u.theory.intro+'</p>' +
+    lettersHtml + specialHtml + accentHtml +
+    grammarHtml +
+    clocksHtml +
+    dialogueSection + '</section>' +
+
+    glossarySection +
+
+    '<section class="card"><h2><span class="tag">Pratica scritta</span> Esercizi</h2>' +
+    writtenHtml +
+    '<button class="action" onclick="checkWritten()">Correggi</button></section>' +
+
+    '<section class="card"><h2><span class="tag">Pratica orale</span> Ascolta e ripeti</h2>' +
+    '<p class="note" style="margin-top:-.4rem;">Clica el botó per escoltar la pronunciació.</p>' +
+    oralHtml + '</section>' +
+
+    '<section class="card"><h2><span class="tag">Test</span> Verifica il tuo livello</h2>' +
+    quizHtml +
+    '<button class="action" onclick="checkTest()">Enviar test</button>' +
+    '<div id="test-result"></div></section>';
+}
+
+function renderAll(){ renderSidebar(); renderProgress(); renderUnit(); }
+
+function checkWritten(){
+  document.querySelectorAll('.exercise').forEach(ex => {
+    const type = ex.getAttribute('data-type');
+    const fb = ex.querySelector('.fb');
+    if(type === 'fill'){
+      const answer = ex.getAttribute('data-answer').toLowerCase();
+      const input = ex.querySelector('input[type=text]');
+      const val = input.value.trim().toLowerCase();
+      if(val === ''){ fb.textContent = 'Scrivi una risposta prima di correggere.'; fb.className = 'fb bad'; return; }
+      if(val === answer){ fb.textContent = 'Corretto!'; fb.className = 'fb ok'; }
+      else { fb.textContent = 'Non esatto. La risposta è: ' + answer; fb.className = 'fb bad'; }
+    } else {
+      const correct = ex.getAttribute('data-correct');
+      const idx = ex.getAttribute('data-index');
+      const selected = ex.querySelector('input[name="w'+idx+'"]:checked');
+      if(!selected){ fb.textContent = 'Seleziona un\'opzione.'; fb.className = 'fb bad'; return; }
+      if(selected.value === correct){ fb.textContent = 'Corretto!'; fb.className = 'fb ok'; }
+      else { fb.textContent = 'Non è corretto, riprova.'; fb.className = 'fb bad'; }
+    }
+  });
+}
+
+function speak(text){
+  if(!('speechSynthesis' in window)){ alert('Il tuo browser non supporta la sintesi vocale.'); return; }
+  const voice = getItalianVoice();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = voice ? voice.lang : 'it-IT';
+  if(voice) utter.voice = voice;
+  utter.rate = 0.85;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utter);
+}
+
+function checkTest(){
+  const blocks = document.querySelectorAll('.q-block');
+  let correct = 0, allAnswered = true;
+  blocks.forEach((block, qi) => {
+    const selected = block.querySelector('input[name="qz'+qi+'"]:checked');
+    if(!selected){ allAnswered = false; return; }
+    if(parseInt(selected.value) === parseInt(block.getAttribute('data-correct'))) correct++;
+  });
+  const result = document.getElementById('test-result');
+  if(!allAnswered){
+    result.textContent = "Rispondi a tutte le domande prima di inviare il test.";
+    result.className = 'bad';
+    return;
+  }
+  const total = blocks.length;
+  const pct = Math.round((correct/total)*100);
+  if(pct >= 70){
+    completed.add(currentUnit);
+    saveProgress();
+    result.textContent = 'Ottimo! Hai risposto correttamente a ' + correct + ' su ' + total + ' (' + pct + '%). Unità sbloccata.';
+    result.className = 'ok';
+    renderSidebar();
+    renderProgress();
+  } else {
+    result.textContent = 'Hai risposto correttamente a ' + correct + ' su ' + total + ' (' + pct + '%). Ripassa la teoria e riprova.';
+    result.className = 'mid';
+  }
+}
+
+/* ---------- GLOSSARI INTERACTIU (hover + tap) ---------- */
+document.addEventListener('click', function(e){
+  const gloss = e.target.closest('.gloss');
+  const tooltip = document.getElementById('glossTooltip');
+  if(gloss){
+    e.stopPropagation();
+    if(openGlossEl === gloss){ tooltip.style.display = 'none'; openGlossEl = null; return; }
+    const rect = gloss.getBoundingClientRect();
+    tooltip.textContent = gloss.dataset.es;
+    const left = Math.min(rect.left + window.scrollX, window.scrollX + document.documentElement.clientWidth - 240);
+    tooltip.style.left = Math.max(left, 8) + 'px';
+    tooltip.style.top = (rect.bottom + window.scrollY + 6) + 'px';
+    tooltip.style.display = 'block';
+    openGlossEl = gloss;
+    return;
+  }
+  const consigna = e.target.closest('.consigna');
+  if(consigna){
+    e.stopPropagation();
+    toggleConsignaTranslation(consigna);
+    return;
+  }
+  tooltip.style.display = 'none';
+  openGlossEl = null;
+});
+window.addEventListener('scroll', function(){
+  document.getElementById('glossTooltip').style.display = 'none';
+  openGlossEl = null;
+}, true);
+
+if('speechSynthesis' in window){
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = function(){ window.speechSynthesis.getVoices(); };
+}
+
+async function onAuthReady(){
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('appRoot').style.display = 'block';
+  renderAll();
+}
+
+function showAuthScreen(){
+  document.getElementById('authScreen').style.display = 'flex';
+  document.getElementById('appRoot').style.display = 'none';
+}
+
+sb.auth.onAuthStateChange(async (event, session) => {
+  if(event === 'PASSWORD_RECOVERY'){
+    showAuthMsg('Inserisci la nuova password e premi il pulsante per salvarla.', 'ok');
+    authMode = 'recovery';
+    document.getElementById('authSubmitBtn').textContent = 'Salva la nuova password';
+    return;
+  }
+  if(session && session.user){
+    await loadProfile(session.user);
+    onAuthReady();
+  } else {
+    currentUser = null;
+    currentProfile = null;
+    showAuthScreen();
+  }
+});
+
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if(session && session.user){
+    await loadProfile(session.user);
+    onAuthReady();
+  }
+})();
+</script>
+</body>
+</html>
